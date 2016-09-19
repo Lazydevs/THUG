@@ -32,3 +32,6 @@ clean:
 
 fclean: clean
 	del $(NAME)
+
+test : all
+	THUG.exe
