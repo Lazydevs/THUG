@@ -14,17 +14,32 @@ int main(int argc, char **argv)
 	lz::camera	*camera = new lz::camera(vec3(0, 0, 0));
 
 	Game 		*game = new Game();
+
 	double x;
 	double y;
 	double dx;
 	double dy;
+	bool grabbed;
+
+	grabbed = false;
 
 	while (!display->isClosed())
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClearColor(0.1, 0.3, 0.7, 1);
 
-		if (glfwGetMouseButton(display->getWindow(), 0))
+		if (glfwGetMouseButton(display->getWindow(), 0) && !grabbed)
+		{
+			grabbed = true;
+			glfwSetInputMode(display->getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		}
+		else if (glfwGetKey(display->getWindow(), GLFW_KEY_ESCAPE) && grabbed)
+		{
+			grabbed = false;
+			glfwSetInputMode(display->getWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			glfwSetCursorPos(display->getWindow(), (double) (display->getWidth() / 2), (double) (display->getHeight() / 2));
+		}
+		if (grabbed)
 		{
 			glfwGetCursorPos(display->getWindow(), &x, &y);
 			dx = x - display->getWidth() / 2;

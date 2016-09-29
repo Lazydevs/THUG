@@ -48,7 +48,7 @@ mat4 mat4::translate(float x, float y, float z)
 
 mat4 mat4::translate(vec3 pos)
 {
-	return (translate(pos.m_x, pos.m_y, pos.m_z));
+	return (translate(pos.x, pos.y, pos.z));
 }
 
 mat4 mat4::rotate(float x, float y, float z)
@@ -95,17 +95,17 @@ mat4 mat4::rotate(vec3 forward, vec3 up, vec3 right)
 	r.normalize();
 	u.normalize();
 
-	result.m_matrix[0 + 0 * 4] = r.m_x;
-	result.m_matrix[0 + 1 * 4] = r.m_y;
-	result.m_matrix[0 + 2 * 4] = r.m_z;
+	result.m_matrix[0 + 0 * 4] = r.x;
+	result.m_matrix[0 + 1 * 4] = r.y;
+	result.m_matrix[0 + 2 * 4] = r.z;
 
-	result.m_matrix[1 + 0 * 4] = u.m_x;
-	result.m_matrix[1 + 1 * 4] = u.m_y;
-	result.m_matrix[1 + 2 * 4] = u.m_z;
+	result.m_matrix[1 + 0 * 4] = u.x;
+	result.m_matrix[1 + 1 * 4] = u.y;
+	result.m_matrix[1 + 2 * 4] = u.z;
 
-	result.m_matrix[2 + 0 * 4] = f.m_x;
-	result.m_matrix[2 + 1 * 4] = f.m_y;
-	result.m_matrix[2 + 2 * 4] = f.m_z;
+	result.m_matrix[2 + 0 * 4] = f.x;
+	result.m_matrix[2 + 1 * 4] = f.y;
+	result.m_matrix[2 + 2 * 4] = f.z;
 
 	return (result);
 }
@@ -134,17 +134,17 @@ mat4 mat4::cameraView(vec3 forward, vec3 up)
 	r = r.cross(f);
 	vec3 u = f.cross(r);
 
-	m.m_matrix[0 + 0 * 4] = r.m_x;
-	m.m_matrix[0 + 1 * 4] = r.m_y;
-	m.m_matrix[0 + 2 * 4] = r.m_z;
+	m.m_matrix[0 + 0 * 4] = r.x;
+	m.m_matrix[0 + 1 * 4] = r.y;
+	m.m_matrix[0 + 2 * 4] = r.z;
 
-	m.m_matrix[1 + 0 * 4] = u.m_x;
-	m.m_matrix[1 + 1 * 4] = u.m_y;
-	m.m_matrix[1 + 2 * 4] = u.m_z;
+	m.m_matrix[1 + 0 * 4] = u.x;
+	m.m_matrix[1 + 1 * 4] = u.y;
+	m.m_matrix[1 + 2 * 4] = u.z;
 
-	m.m_matrix[2 + 0 * 4] = f.m_x;
-	m.m_matrix[2 + 1 * 4] = f.m_y;
-	m.m_matrix[2 + 2 * 4] = f.m_z;
+	m.m_matrix[2 + 0 * 4] = f.x;
+	m.m_matrix[2 + 1 * 4] = f.y;
+	m.m_matrix[2 + 2 * 4] = f.z;
 
 	return (m);
 }
@@ -189,9 +189,9 @@ vec3 mat4::transform(mat4 m, vec3 v)
 	vec3 result;
 
 	result.set(
-		m.m_matrix[0 + 0 * 4] * v.m_x + m.m_matrix[0 + 1 * 4] * v.m_y + m.m_matrix[0 + 2 * 4] * v.m_z + m.m_matrix[0 + 3 * 4],
-		m.m_matrix[1 + 0 * 4] * v.m_x + m.m_matrix[1 + 1 * 4] * v.m_y + m.m_matrix[1 + 2 * 4] * v.m_z + m.m_matrix[1 + 3 * 4],
-		m.m_matrix[2 + 0 * 4] * v.m_x + m.m_matrix[2 + 1 * 4] * v.m_y + m.m_matrix[2 + 2 * 4] * v.m_z + m.m_matrix[2 + 3 * 4]
+		m.m_matrix[0 + 0 * 4] * v.x + m.m_matrix[0 + 1 * 4] * v.y + m.m_matrix[0 + 2 * 4] * v.z + m.m_matrix[0 + 3 * 4],
+		m.m_matrix[1 + 0 * 4] * v.x + m.m_matrix[1 + 1 * 4] * v.y + m.m_matrix[1 + 2 * 4] * v.z + m.m_matrix[1 + 3 * 4],
+		m.m_matrix[2 + 0 * 4] * v.x + m.m_matrix[2 + 1 * 4] * v.y + m.m_matrix[2 + 2 * 4] * v.z + m.m_matrix[2 + 3 * 4]
 	);
 
 	return (result);

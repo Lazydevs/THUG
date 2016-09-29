@@ -61,7 +61,7 @@ void shader::setUniform(char *name, GLfloat v)
 
 void shader::setUniform(char* name, vec3 v)
 {
-	glUniform3f(getUniformLocation(name), v.m_x, v.m_y, v.m_z);
+	glUniform3f(getUniformLocation(name), v.x, v.y, v.z);
 }
 
 void shader::setUniform(char* name, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
