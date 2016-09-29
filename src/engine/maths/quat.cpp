@@ -5,34 +5,34 @@ using namespace maths;
 
 quat::quat()
 {
-	m_x = 0;
-	m_y = 0;
-	m_z = 0;
-	m_w = 1;
+	this->x = 0;
+	this->y = 0;
+	this->z = 0;
+	this->w = 1;
 }
 
 quat::quat(quat* q)
 {
-	m_x = q->m_x;
-	m_y = q->m_y;
-	m_z = q->m_z;
-	m_w = q->m_w;
+	this->x = q->x;
+	this->y = q->y;
+	this->z = q->z;
+	this->w = q->w;
 }
 
 quat::quat(float x, float y, float z, float w)
 {
-	m_x = x;
-	m_y = y;
-	m_z = z;
-	m_w = w;
+	this->x = x;
+	this->y = y;
+	this->z = z;
+	this->w = w;
 }
 
 void quat::set(float x, float y, float z, float w)
 {
-	m_x = x;
-	m_y = y;
-	m_z = z;
-	m_w = w;
+	this->x = x;
+	this->y = y;
+	this->z = z;
+	this->w = w;
 }
 
 quat::quat(vec3 axis, float angle)
@@ -40,22 +40,22 @@ quat::quat(vec3 axis, float angle)
 	float s = SIN(angle / 2.0f);
 	float c = COS(angle / 2.0f);
 
-	m_x = axis.m_x * s;
-	m_y = axis.m_y * s;
-	m_z = axis.m_z * s;
-	m_w = c;
+	this->x = axis.x * s;
+	this->y = axis.y * s;
+	this->z = axis.z * s;
+	this->w = c;
 }
 
 float quat::magnitude()
 {
-	return (SQRT(m_x * m_x + m_y * m_y + m_z * m_z + m_w * m_w));
+	return (SQRT(x * x + y * y + z * z + w * w));
 }
 
 quat quat::normalize()
 {
 	quat result;
 	float mag = magnitude();
-	result.set(m_x / mag, m_y / mag, m_z / mag, m_w / mag);
+	result.set(x / mag, y / mag, z / mag, w / mag);
 
 	return (result);
 }
@@ -63,7 +63,7 @@ quat quat::normalize()
 quat quat::conjugate()
 {
 	quat result;
-	result.set(-m_x, -m_y, -m_z, m_w);
+	result.set(-x, -y, -z, w);
 
 	return (result);
 }
@@ -72,10 +72,10 @@ quat quat::mul(quat r)
 {
 	quat result;
 
-	result.m_w = m_w * r.m_w - m_x * r.m_x - m_y * r.m_y - m_z * r.m_z;
-	result.m_x = m_x * r.m_w + m_w * r.m_x + m_y * r.m_z - m_z * r.m_y;
-	result.m_y = m_y * r.m_w + m_w * r.m_y + m_z * r.m_x - m_x * r.m_z;
-	result.m_z = m_z * r.m_w + m_w * r.m_z + m_x * r.m_y - m_y * r.m_x;
+	result.w = w * r.w - x * r.x - y * r.y - z * r.z;
+	result.x = x * r.w + w * r.x + y * r.z - z * r.y;
+	result.y = y * r.w + w * r.y + z * r.x - x * r.z;
+	result.z = z * r.w + w * r.z + x * r.y - y * r.x;
 
 	return (result);
 }
@@ -84,29 +84,29 @@ quat quat::mul(vec3 r)
 {
 	quat result;
 
-	result.m_w = -m_x * r.m_x - m_y * r.m_y - m_z * r.m_z;
-	result.m_x = m_w * r.m_x + m_y * r.m_z - m_z * r.m_y;
-	result.m_y = m_w * r.m_y + m_z * r.m_x - m_x * r.m_z;
-	result.m_z = m_w * r.m_z + m_x * r.m_y - m_y * r.m_x;
+	result.w = -x * r.x - y * r.y - z * r.z;
+	result.x = w * r.x + y * r.z - z * r.y;
+	result.y = w * r.y + z * r.x - x * r.z;
+	result.z = w * r.z + x * r.y - y * r.x;
 
 	return (result);
 }
 
 float quat::dot(quat r)
 {
-	return (m_x * r.m_x + m_y * r.m_y + m_z * r.m_z + m_w * r.m_w);
+	return (x * r.x + y * r.y + z * r.z + w * r.w);
 }
 
 mat4 quat::to_matrix()
 {
-	vec3 forward(2.0f * (m_x * m_z - m_w * m_y), 2.0f * (m_y * m_z + m_w * m_x), 1.0f - 2.0f * (m_x * m_x + m_y * m_y));
-	vec3 up(2.0f * (m_x * m_y + m_w * m_z), 1.0f - 2.0f * (m_x * m_x + m_z * m_z), 2.0f * (m_y * m_z - m_w * m_x));
-	vec3 right(1.0f - 2.0f * (m_y * m_y + m_z * m_z), 2.0f * (m_x * m_y - m_w * m_z), 2.0f * (m_x * m_z + m_w * m_y));
+	vec3 forward(2.0f * (x * z - w * y), 2.0f * (y * z + w * x), 1.0f - 2.0f * (x * x + y * y));
+	vec3 up(2.0f * (x * y + w * z), 1.0f - 2.0f * (x * x + z * z), 2.0f * (y * z - w * x));
+	vec3 right(1.0f - 2.0f * (y * y + z * z), 2.0f * (x * y - w * z), 2.0f * (x * z + w * y));
 
 	return (mat4::rotate(forward, up, right));
 }
 
-vec3 quat::get_forward()
+vec3 quat::getForward()
 {
 	vec3 result(0, 0, 1);
 	result = result.rotate(this);
@@ -114,7 +114,7 @@ vec3 quat::get_forward()
 	return (result);
 }
 
-vec3 quat::get_back()
+vec3 quat::getBack()
 {
 	vec3 result(0, 0, -1);
 	result = result.rotate(this);
@@ -122,7 +122,7 @@ vec3 quat::get_back()
 	return (result);
 }
 
-vec3 quat::get_right()
+vec3 quat::getRight()
 {
 	vec3 result(1, 0, 0);
 	result = result.rotate(this);
@@ -130,7 +130,7 @@ vec3 quat::get_right()
 	return (result);
 }
 
-vec3 quat::get_left()
+vec3 quat::getLeft()
 {
 	vec3 result(-1, 0, 0);
 	result = result.rotate(this);
@@ -138,7 +138,7 @@ vec3 quat::get_left()
 	return (result);
 }
 
-vec3 quat::get_up()
+vec3 quat::getUp()
 {
 	vec3 result(0, 1, 0);
 	result = result.rotate(this);
@@ -146,7 +146,7 @@ vec3 quat::get_up()
 	return (result);
 }
 
-vec3 quat::get_down()
+vec3 quat::getDown()
 {
 	vec3 result(0, -1, 0);
 	result = result.rotate(this);

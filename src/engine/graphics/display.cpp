@@ -32,7 +32,7 @@ void display::create(const char *title, int width, int height)
         return;
     }
 
-    glfwSwapInterval(0);
+    glfwSwapInterval(1);
     glfwMakeContextCurrent(m_window);
 
 	glewExperimental = GL_TRUE;
@@ -67,13 +67,13 @@ void display::update()
     m_closed = glfwWindowShouldClose(m_window) == 1;
 }
 
-void display::set_title(const char* title)
+void display::setTitle(const char* title)
 {
     m_title = title;
     glfwSetWindowTitle(m_window, title);
 }
 
-const char *display::get_title()
+const char *display::getTitle()
 {
-    return m_title.c_str();
+    return (m_title.c_str());
 }

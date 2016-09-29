@@ -36,9 +36,9 @@ namespace lz
 	    class vec3
 	    {
 	    public:
-	        float m_x;
-	        float m_y;
-	        float m_z;
+	        float x;
+	        float y;
+	        float z;
 
 			vec3();
 			vec3(float x, float y, float z);
@@ -58,52 +58,52 @@ namespace lz
 			//ADD
 			inline vec3 add(float x, float y, float z)
 			{
-				m_x += x;
-				m_y += y;
-				m_z += z;
+				this->x += x;
+				this->y += y;
+				this->z += z;
 
 				return (this);
 			}
 			inline vec3 add(float v) { return add(v, v, v); };
-			inline vec3 add(vec3 v) { return add(v.m_x, v.m_y, v.m_z); };
+			inline vec3 add(vec3 v) { return add(v.x, v.y, v.z); };
 
 			//SUB
 			inline vec3 sub(float x, float y, float z)
 			{
-				m_x -= x;
-				m_y -= y;
-				m_z -= z;
+				this->x -= x;
+				this->y -= y;
+				this->z -= z;
 
 				return (this);
 			}
 			inline vec3 sub(float v) { return sub(v, v, v); };
-			inline vec3 sub(vec3 v) { return sub(v.m_x, v.m_y, v.m_z); };
+			inline vec3 sub(vec3 v) { return sub(v.x, v.y, v.z); };
 
 			//MUL
 			inline vec3 mul(float x, float y, float z)
 			{
-				m_x *= x;
-				m_y *= y;
-				m_z *= z;
+				this->x *= x;
+				this->y *= y;
+				this->z *= z;
 
 				return (this);
 			}
 			inline vec3 mul(float v) { return mul(v, v, v); };
-			inline vec3 mul(vec3 v) { return mul(v.m_x, v.m_y, v.m_z); };
+			inline vec3 mul(vec3 v) { return mul(v.x, v.y, v.z); };
 
 			//DIV
 			inline vec3 div(float x, float y, float z)
 			{
-				m_x /= x;
-				m_y /= y;
-				m_z /= z;
+				this->x /= x;
+				this->y /= y;
+				this->z /= z;
 
 				return (this);
 			}
 			inline vec3 div(float v) { return div(v, v, v); };
-			inline vec3 div(vec3 v) { return div(v.m_x, v.m_y, v.m_z); };
+			inline vec3 div(vec3 v) { return div(v.x, v.y, v.z); };
 
-			inline vec3 copy() { return vec3(m_x, m_y, m_z); };
+			inline vec3 copy() { return vec3(this->x, this->y, this->z); };
 	    };
 
 	    class mat4
@@ -131,10 +131,10 @@ namespace lz
 	    class quat
 	    {
 	    public:
-	        float m_x;
-	        float m_y;
-	        float m_z;
-	        float m_w;
+	        float x;
+	        float y;
+	        float z;
+	        float w;
 
 			quat();
 			quat(quat* q);
@@ -151,12 +151,12 @@ namespace lz
 
 			mat4 to_matrix();
 
-			vec3 get_forward();
-			vec3 get_back();
-			vec3 get_right();
-			vec3 get_left();
-			vec3 get_up();
-			vec3 get_down();
+			vec3 getForward();
+			vec3 getBack();
+			vec3 getRight();
+			vec3 getLeft();
+			vec3 getUp();
+			vec3 getDown();
 	    };
 	}
 }

@@ -2,6 +2,7 @@
 # define GAME_H
 
 # include <LZ/shader.h>
+# include <LZ/camera.h>
 # include <GL/glew.h>
 
 class Game
@@ -13,7 +14,7 @@ public:
 	~Game();
 
 	void update();
-	void render(lz::shader *shader);
+	void render(lz::shader *shader, lz::camera *camera);
 };
 
 #endif

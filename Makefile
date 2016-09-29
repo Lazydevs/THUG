@@ -8,6 +8,7 @@ FILES	=	main.cpp															\
 			engine/utils/string_utils.cpp										\
 			engine/utils/file_utils.cpp											\
 			engine/maths/transform.cpp											\
+			engine/graphics/camera.cpp											\
 			game/game.cpp
 
 NAME = THUG

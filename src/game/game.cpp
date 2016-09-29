@@ -42,11 +42,9 @@ void Game::update()
 
 }
 
-void Game::render(shader *shader)
+void Game::render(shader *shader, camera *camera)
 {
-	shader->bind();
-	shader->setUniform("projectionMatrix", mat4::perspective(70.0, 1.7, 100.0, 0.1));
-	shader->setUniform("modelViewMatrix", mat4::translate(0, 0, 3).mul(mat4::rotate(0, 0, 45)));
+	shader->setUniform((char *)"modelMatrix", mat4::translate(0, 0, 3).mul(mat4::rotate(0, 0, 45)));
 
 	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

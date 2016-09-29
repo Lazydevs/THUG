@@ -31,16 +31,17 @@ namespace lz
 
 	    void update();
 
-	    void set_title(const char* title);
-	    const char *get_title();
+	    void setTitle(const char* title);
+	    const char *getTitle();
 
-	    inline GLFWwindow *get_window() { return m_window; };
 
-	    inline int get_width() { return m_width; };
-	    inline int get_height() { return m_height; };
+	    inline GLFWwindow *getWindow() { return m_window; };
 
-	    inline bool was_resized() { return m_resized; };
-	    inline bool is_closed() { return m_closed; };
+	    inline int getWidth() { return m_width; };
+	    inline int getHeight() { return m_height; };
+
+	    inline bool wasResized() { return m_resized; };
+	    inline bool isClosed() { return m_closed; };
 	};
 }
 #endif

@@ -11,7 +11,7 @@ shader::shader(const char *vertex_path, const char *fragment_path)
 {
 	const char *vertex_source = load_file(vertex_path);
 	const char *fragment_source = load_file(fragment_path);
-	m_program = shader::create_program(vertex_source, fragment_source);
+	m_program = shader::createProgram(vertex_source, fragment_source);
 }
 
 shader::~shader()
@@ -19,7 +19,7 @@ shader::~shader()
 	glDeleteProgram(m_program);
 }
 
-GLuint shader::create_program(const char *vertex_source, const char *fragment_source)
+GLuint shader::createProgram(const char *vertex_source, const char *fragment_source)
 {
 	GLuint program = glCreateProgram();
 
@@ -29,8 +29,8 @@ GLuint shader::create_program(const char *vertex_source, const char *fragment_so
 	GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
 	GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
 
-	GLuint vertex_shader = shader::create_shader(vertex_source, GL_VERTEX_SHADER);
-	GLuint fragment_shader = shader::create_shader(fragment_source, GL_FRAGMENT_SHADER);
+	GLuint vertex_shader = shader::createShader(vertex_source, GL_VERTEX_SHADER);
+	GLuint fragment_shader = shader::createShader(fragment_source, GL_FRAGMENT_SHADER);
 
 	glAttachShader(program, vertex_shader);
 	glAttachShader(program, fragment_shader);
@@ -74,7 +74,7 @@ void shader::setUniform(char* name, mat4 m)
 	glUniformMatrix4fv(getUniformLocation(name), 1, false, m.m_matrix);
 }
 
-GLuint shader::create_shader(const char *source, int type)
+GLuint shader::createShader(const char *source, int type)
 {
 	GLuint shader;
 	GLint result;

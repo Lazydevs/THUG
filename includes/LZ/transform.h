@@ -48,18 +48,22 @@ namespace lz
 			m_scale = t->m_scale;
 		}
 
-		maths::mat4 to_matrix();
+		maths::mat4 toMatrix();
 
 		void rotate(maths::vec3 axis, float angle);
 		void translate(maths::vec3 axis, float speed);
 
-		inline maths::vec3 get_position() { return (m_pos); };
-		inline maths::quat get_rotation() { return (m_rot); };
-		inline maths::vec3 get_scale() { return (m_scale); };
+		inline maths::vec3 getPosition() { return (m_pos); };
+		inline maths::quat getRotation() { return (m_rot); };
+		inline maths::vec3 getScale() { return (m_scale); };
 
-		inline void set_position(maths::vec3 pos) { m_pos = pos; };
-		inline void set_rotation(maths::quat rot) { m_rot = rot; };
-		inline void set_scale(maths::vec3 scale) { m_scale = scale; };
+		inline void setPosition(maths::vec3 pos) { m_pos = pos; };
+		inline void setRotation(maths::quat rot) { m_rot = rot; };
+		inline void setScale(maths::vec3 scale) { m_scale = scale; };
+
+		inline maths::vec3 getForward() { return (m_rot.getForward()); }
+		inline maths::vec3 getUp() { return (m_rot.getUp()); }
+		inline maths::vec3 getRight() { return (m_rot.getRight()); }
 	};
 }
 

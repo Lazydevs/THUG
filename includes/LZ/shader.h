@@ -13,8 +13,8 @@ namespace lz
 	private:
 		GLuint	m_program;
 
-		GLuint	create_program(const char *vertex_source, const char *fragment_source);
-		GLuint	create_shader(const char *source, int shader);
+		GLuint	createProgram(const char *vertex_source, const char *fragment_source);
+		GLuint	createShader(const char *source, int shader);
 
 		GLuint 	getUniformLocation(char *name);
 
@@ -31,7 +31,7 @@ namespace lz
 		inline void bind() { glUseProgram(m_program); };
 		inline void unbind() { glUseProgram(0); };
 
-		inline int get_program() { return (m_program); }
+		inline int getProgram() { return (m_program); }
 	};
 }
 #endif
