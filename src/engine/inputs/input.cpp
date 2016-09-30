@@ -10,7 +10,7 @@ input::~input()
 {
 }
 
-void input::update(display *display)
+void input::updateMouseMovement(display *display)
 {
 	m_window = display->getWindow();
 	if (glfwGetMouseButton(m_window, 0) && !m_focused)

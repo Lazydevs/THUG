@@ -20,7 +20,7 @@ namespace lz
 		input();
 		~input();
 
-		void update(display *display);
+		void updateMouseMovement(display *display);
 
 		bool getKey(int key);
 		bool getButton(int button);

@@ -22,7 +22,8 @@ namespace lz
 
 		void update();
 		void perspective(float fov, float w, float h, float near, float far);
-		void control(input *input, float speed, float mspeed);
+		void mouseLook(input *input, float speed);
+		void control(input *input, float speed);
 
 		inline maths::mat4 getViewMatrix() { return (m_view_matrix); };
 		inline maths::mat4 getProjectionMatrix() { return (m_projection_matrix); };

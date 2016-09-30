@@ -10,6 +10,7 @@ FILES	=	main.cpp															\
 			engine/maths/transform.cpp											\
 			engine/graphics/camera.cpp											\
 			engine/inputs/input.cpp												\
+			engine/utils/timer.cpp												\
 			game/game.cpp
 
 NAME = THUG

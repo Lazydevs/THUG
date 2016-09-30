@@ -22,11 +22,14 @@ camera::~camera()
 
 }
 
-void camera::control(input *input, float speed, float mspeed)
+void camera::mouseLook(input *input, float speed)
 {
-	m_transform.rotate(maths::vec3(0, 1, 0), input->getDX() * mspeed);
-	m_transform.rotate(m_transform.getRight(), input->getDY() * mspeed);
+	m_transform.rotate(maths::vec3(0, 1, 0), input->getDX() * speed);
+	m_transform.rotate(m_transform.getRight(), input->getDY() * speed);
+}
 
+void camera::control(input *input, float speed)
+{
 	if (input->getKey(GLFW_KEY_W))
 		m_transform.translate(m_transform.getForward(), speed);
 	if (input->getKey(GLFW_KEY_S))
