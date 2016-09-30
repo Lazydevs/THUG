@@ -1,8 +1,8 @@
 #ifndef ERROR_H
 # define ERROR_H
 
-#include <unistd.h>
-#include <stdlib.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 namespace lz
 {
