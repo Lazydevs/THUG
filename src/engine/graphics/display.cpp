@@ -8,6 +8,8 @@ display::display(const char *title, int width, int height)
     m_height = height;
 
     display::create(title, width, height);
+
+	glEnable(GL_DEPTH_TEST);
 }
 
 void display::create(const char *title, int width, int height)

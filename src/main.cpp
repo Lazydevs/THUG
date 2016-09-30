@@ -4,6 +4,7 @@
 #include <LZ/maths.h>
 #include <LZ/display.h>
 #include <LZ/camera.h>
+#include <LZ/input.h>
 
 using namespace lz::maths;
 
@@ -12,44 +13,19 @@ int main(int argc, char **argv)
 	lz::display *display = new lz::display("THUG !", 1280, 720);
 	lz::shader 	*shader = new lz::shader("data/shaders/main.vert", "data/shaders/main.frag");
 	lz::camera	*camera = new lz::camera(vec3(0, 0, 0));
+	lz::input	*input = new lz::input();
 
 	Game 		*game = new Game();
 
-	double x;
-	double y;
-	double dx;
-	double dy;
-	bool grabbed;
-
-	grabbed = false;
-
 	while (!display->isClosed())
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
-		glClearColor(0.1, 0.3, 0.7, 1);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		if (glfwGetMouseButton(display->getWindow(), 0) && !grabbed)
-		{
-			grabbed = true;
-			glfwSetInputMode(display->getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-		}
-		else if (glfwGetKey(display->getWindow(), GLFW_KEY_ESCAPE) && grabbed)
-		{
-			grabbed = false;
-			glfwSetInputMode(display->getWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-			glfwSetCursorPos(display->getWindow(), (double) (display->getWidth() / 2), (double) (display->getHeight() / 2));
-		}
-		if (grabbed)
-		{
-			glfwGetCursorPos(display->getWindow(), &x, &y);
-			dx = x - display->getWidth() / 2;
-			dy = y - display->getHeight() / 2;
-			std::cout << dx << " - " << dy << std::endl;
-			glfwSetCursorPos(display->getWindow(), (double) (display->getWidth() / 2), (double) (display->getHeight() / 2));
-		}
+		input->update(display);
 
 		camera->update();
 		camera->perspective(70.0, display->getWidth(), display->getHeight(), 0.1, 1000.0);
+		camera->control(input, 0.01, 0.35);
 		game->update();
 
 		shader->bind();
@@ -64,6 +40,7 @@ int main(int argc, char **argv)
 
 	delete display;
 	delete game;
+	delete camera;
 
 	return (0);
 }
