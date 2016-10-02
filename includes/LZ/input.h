@@ -13,13 +13,14 @@ namespace lz
 		double m_y;
 		double m_dx;
 		double m_dy;
-		double m_focused;
+		bool m_focused;
 		GLFWwindow *m_window;
 
 	public:
-		input();
+		input(GLFWwindow *window);
 		~input();
 
+		void update(display *display);
 		void updateMouseMovement(display *display);
 
 		bool getKey(int key);
@@ -30,6 +31,7 @@ namespace lz
 		inline double getDX() { return (m_dx); }
 		inline double getDY() { return (m_dy); }
 		inline bool isFocused() { return (m_focused); }
+		inline void setFocused(bool focused) { m_focused = focused; }
 	};
 }
 

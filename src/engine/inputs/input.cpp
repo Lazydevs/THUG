@@ -2,21 +2,32 @@
 
 using namespace lz;
 
-input::input()
+input::input(GLFWwindow *window)
 {
+	m_window = window;
+	m_x = 0;
+	m_y = 0;
+	m_dx = 0;
+	m_dy = 0;
+	m_focused = false;
 }
 
 input::~input()
 {
 }
 
+void input::update(display *display)
+{
+
+}
+
 void input::updateMouseMovement(display *display)
 {
-	m_window = display->getWindow();
 	if (glfwGetMouseButton(m_window, 0) && !m_focused)
 	{
 		m_focused = true;
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		glfwSetCursorPos(m_window, (double) (display->getWidth() / 2), (double) (display->getHeight() / 2));
 	}
 	else if (glfwGetKey(m_window, GLFW_KEY_ESCAPE) && m_focused)
 	{

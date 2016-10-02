@@ -3,18 +3,27 @@
 
 # include <LZ/shader.h>
 # include <LZ/camera.h>
+# include <LZ/transform.h>
 # include <GL/glew.h>
+# include <iostream>
+# include <vector>
+
+
+# include "box.h"
 
 class Game
 {
 private:
-	GLuint vao, vbo, ibo;
+	Box *m_groundBox;
+	std::vector<Box*> m_boxes;
+	bool m_mousePressed;
+
 public:
 	Game();
 	~Game();
 
-	void update();
-	void render(lz::shader *shader, lz::camera *camera);
+	void update(lz::input *input, lz::camera *camera);
+	void render(lz::shader *shader);
 };
 
 #endif

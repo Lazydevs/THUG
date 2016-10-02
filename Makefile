@@ -11,6 +11,7 @@ FILES	=	main.cpp															\
 			engine/graphics/camera.cpp											\
 			engine/inputs/input.cpp												\
 			engine/utils/timer.cpp												\
+			game/box.cpp												\
 			game/game.cpp
 
 NAME = THUG
