@@ -24,8 +24,6 @@ camera::~camera()
 
 void camera::mouseLook(input *input, float speed)
 {
-	std::cout << input->getDX() << "  " << input->getY() << std::endl;
-
 	m_transform.rotate(maths::vec3(0, 1, 0), input->getDX() * speed);
 	m_transform.rotate(m_transform.getRight(), input->getDY() * speed);
 }

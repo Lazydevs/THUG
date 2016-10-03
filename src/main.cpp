@@ -19,6 +19,8 @@ int main(int argc, char **argv)
 
 	double updatedTime = 0;
 	lz::timer	timer = lz::timer();
+	int frames;
+	int ticks;
 
 	while (!display.isClosed())
 	{
@@ -27,6 +29,13 @@ int main(int argc, char **argv)
 			camera.control(&input, 0.1);
 			game->update(&input, &camera);
 			updatedTime += 16.666666666667;
+			ticks++;
+			if (ticks % 60 == 0)
+			{
+				std::cout << "fps: " << frames << std::endl;
+				frames = 0;
+				ticks = 0;
+			}
 		}
 
 		input.updateMouseMovement(&display);
@@ -44,6 +53,7 @@ int main(int argc, char **argv)
 		display.update();
 		if (display.wasResized())
 			glViewport(0, 0, display.getWidth(), display.getHeight());
+		frames++;
 	}
 
 	delete game;

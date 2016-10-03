@@ -11,7 +11,7 @@ FILES	=	main.cpp															\
 			engine/graphics/camera.cpp											\
 			engine/inputs/input.cpp												\
 			engine/utils/timer.cpp												\
-			game/box.cpp												\
+			game/box.cpp														\
 			game/game.cpp
 
 NAME = THUG
@@ -32,7 +32,7 @@ THUG: $(OBJ)
 .PHONY: clean fclean
 
 clean:
-	del $(OBJ)
+	del 
 
 fclean: clean
 	del $(NAME)
