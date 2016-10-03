@@ -17,13 +17,14 @@ FILES	=	main.cpp															\
 NAME = THUG
 CXX = g++
 LDFLAGS = -lglfw3 -lglew32 -lopengl32 -lgdi32
-CXXFLAGS = -I includes/ -std=gnu++11 -L libs/ $(LDFLAGS)
+CXXFLAGS = -I includes/ -std=c++11 -L libs/ $(LDFLAGS)
+BIN = bin/
 SRC = $(addprefix src/,$(FILES))
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
-THUG: $(OBJ)
+$(NAME): $(OBJ)
 	$(CXX) -o $@ $^ $(CXXFLAGS)
 
 %.o: %.cpp
