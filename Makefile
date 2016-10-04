@@ -16,7 +16,7 @@ FILES	=	main.cpp															\
 
 NAME = THUG
 CXX = g++
-LDFLAGS = -lglfw3 -lglew32 -lopengl32 -lgdi32
+LDFLAGS = --static -lglfw3 -lglew32 -lopengl32 -lgdi32
 CXXFLAGS = -I includes/ -std=c++11 -L libs/ $(LDFLAGS)
 BIN = bin/
 SRC = $(addprefix src/,$(FILES))

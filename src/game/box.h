@@ -85,6 +85,7 @@ private:
 
 public:
 	Box(lz::transform transform);
+	Box(lz::transform transform, lz::maths::vec3 force);
 	~Box();
 
 	void update();
