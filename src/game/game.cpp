@@ -25,7 +25,7 @@ void Game::update(input *input, camera *camera)
 		for (Box *box : m_boxes)
 		box->update();
 
-	if (input->getButton(0) && !m_mousePressed)
+	if (input->getButton(0))
 	{
 		transform boxTransform = transform(camera->getTransform());
 		boxTransform.setScale(vec3(0.5, 0.5, 0.5));

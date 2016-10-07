@@ -37,23 +37,25 @@ int main(int argc, char **argv)
 				ticks = 0;
 			}
 		}
+		else
+		{
+			input.updateMouseMovement(&display);
+			camera.update();
+			camera.mouseLook(&input, 0.35);
 
-		input.updateMouseMovement(&display);
-		camera.update();
-		camera.mouseLook(&input, 0.35);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			camera.perspective(70.0, display.getWidth(), display.getHeight(), 0.1, 1000.0);
+			shader.bind();
+			shader.setUniform((char*)"projectionMatrix", camera.getProjectionMatrix());
+			shader.setUniform((char*)"viewMatrix", camera.getViewMatrix());
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		camera.perspective(70.0, display.getWidth(), display.getHeight(), 0.1, 1000.0);
-		shader.bind();
-		shader.setUniform((char*)"projectionMatrix", camera.getProjectionMatrix());
-		shader.setUniform((char*)"viewMatrix", camera.getViewMatrix());
+			game->render(&shader);
 
-		game->render(&shader);
-
-		display.update();
-		if (display.wasResized())
-			glViewport(0, 0, display.getWidth(), display.getHeight());
-		frames++;
+			display.update();
+			if (display.wasResized())
+				glViewport(0, 0, display.getWidth(), display.getHeight());
+			frames++;	
+		}
 	}
 
 	delete game;

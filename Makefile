@@ -1,3 +1,8 @@
+#-------------------------------------------------------------------------------#
+#                                THUG MAKEFILE                                  #
+#-------------------------------------------------------------------------------#
+
+# We have to do this because of Winshit and because wildcards are bad
 FILES	=	main.cpp															\
 			engine/graphics/display.cpp											\
 			engine/maths/vec3.cpp												\
@@ -15,29 +20,42 @@ FILES	=	main.cpp															\
 			game/box.cpp														\
 			game/game.cpp
 
+# We also have to do this because of Winshit but predominately because of Winshit 
+DIRS	=	bin\engine\maths													\
+			bin\engine\graphics													\
+			bin\engine\inputs													\
+			bin\engine\utils													\
+			bin\engine\physics													\
+			bin\game
+
+LDFLAGS = 	--static -lglfw3 -lglew32 -lopengl32 -lgdi32 						\
+			-lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath 
+
 NAME = THUG
 CXX = g++
-LDFLAGS = --static -lglfw3 -lglew32 -lopengl32 -lgdi32 -lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath 
 CXXFLAGS = -I ./includes/ -I ./includes/Bullet/ -std=c++11 -L ./libs/ $(LDFLAGS)
-BIN = bin/
+BIN = bin
 SRC = $(addprefix src/,$(FILES))
-OBJ = $(SRC:.cpp=.o)
+OBJ = $(addprefix $(BIN)/,$(FILES:.cpp=.o))
 
-all: $(NAME)
+all: $(DIRS) $(NAME)
+
+$(DIRS):
+	mkdir $(DIRS)
 
 $(NAME): $(OBJ)
 	$(CXX) -o $@ $^ $(CXXFLAGS)
 
-%.o: %.cpp
+$(BIN)/%.o: src/%.cpp
 	$(CXX) -o $@ -c $< $(CXXFLAGS)
 
 .PHONY: clean fclean
 
 clean:
-	del 
+	rmdir /s /q $(BIN)
 
 fclean: clean
-	del $(NAME)
+	del $(NAME).exe
 
 test : all
-	THUG.exe
+	$(NAME).exe
