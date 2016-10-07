@@ -4,6 +4,7 @@
 # include <LZ/maths.h>
 # include <LZ/transform.h>
 # include <LZ/shader.h>
+# include <LZ/physics.h>
 # include <GL/glew.h>
 
 class Box
@@ -13,35 +14,35 @@ private:
 	lz::maths::vec3 m_force;
 	GLuint m_vao, m_vbo, m_nbo, m_ibo;
 	GLfloat m_vertices[6 * 4 * 3] = {
-		0, 0, 0,
-		1, 0, 0,
-		1, 0, 1,
-		0, 0, 1,
+		-1, -1, -1,
+		1, -1, -1,
+		1, -1, 1,
+		-1, -1, 1,
 
-		0, 1, 0,
-		1, 1, 0,
+		-1, 1, -1,
+		1, 1, -1,
 		1, 1, 1,
-		0, 1, 1,
+		-1, 1, 1,
 
-		0, 0, 0,
-		1, 0, 0,
-		1, 1, 0,
-		0, 1, 0,
+		-1, -1, -1,
+		1, -1, -1,
+		1, 1, -1,
+		-1, 1, -1,
 
-		0, 0, 1,
-		1, 0, 1,
+		-1, -1, 1,
+		1, -1, 1,
 		1, 1, 1,
-		0, 1, 1,
+		-1, 1, 1,
 
-		0, 0, 0,
-		0, 1, 0,
-		0, 1, 1,
-		0, 0, 1,
+		-1, -1, -1,
+		-1, 1, -1,
+		-1, 1, 1,
+		-1, -1, 1,
 
-		1, 0, 0,
-		1, 1, 0,
+		1, -1, -1,
+		1, 1, -1,
 		1, 1, 1,
-		1, 0, 1
+		1, -1, 1
 	};
 	GLfloat m_normals[6 * 4 * 3] = {
 		0, -1, 0,
@@ -83,14 +84,16 @@ private:
 		20, 22, 21, 20, 23, 22
 	};
 
+	btRigidBody *m_rigidBody;
+
 public:
-	Box(lz::transform transform);
+	Box(lz::transform transform, float mass);
 	~Box();
 
 	void update();
 	void render(lz::shader *shader);
 
-	inline void setForce(lz::maths::vec3 force) { m_force = force; }
+	inline btRigidBody *getBody() { return (m_rigidBody); }
 };
 
 #endif

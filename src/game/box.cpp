@@ -1,6 +1,7 @@
 #include "box.h"
+#include <iostream>
 
-Box::Box(lz::transform transform)
+Box::Box(lz::transform transform, float mass)
 {
 	m_transform = transform;
 
@@ -25,16 +26,39 @@ Box::Box(lz::transform transform)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(m_indices), m_indices, GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
+
+	
+	btTransform t;
+	t.setIdentity();
+	t.setOrigin(btVector3(m_transform.getPosition().x, m_transform.getPosition().y, m_transform.getPosition().z));
+	t.setRotation(btQuaternion(m_transform.getRotation().x, m_transform.getRotation().y, m_transform.getRotation().z, m_transform.getRotation().w));
+	
+	btBoxShape *boxShape = new btBoxShape(btVector3(transform.getScale().x, transform.getScale().y, transform.getScale().z));
+	btVector3 inertia(0, 0, 0);
+	if (mass != 0)
+		boxShape->calculateLocalInertia(mass, inertia);
+	btDefaultMotionState *motionState = new btDefaultMotionState(t);
+	btRigidBody::btRigidBodyConstructionInfo bodyInfo(mass, motionState, boxShape, inertia);
+	m_rigidBody = new btRigidBody(bodyInfo);
+
+	if (mass != 0)
+	{
+		m_rigidBody->applyCentralForce(btVector3(m_transform.getForward().x * 500, m_transform.getForward().y * 500, m_transform.getForward().z * 500));
+		m_rigidBody->setFriction(2);
+	}
 }
 
 Box::~Box()
 {
-
+	delete m_rigidBody;
 }
 
 void Box::update()
 {
-
+	btTransform t;
+	m_rigidBody->getMotionState()->getWorldTransform(t);
+	m_transform.setPosition(vec3(t.getOrigin().getX(), t.getOrigin().getY(), t.getOrigin().getZ()));
+	m_transform.setRotation(quat(t.getRotation().getX(), t.getRotation().getY(), t.getRotation().getZ(), t.getRotation().getW()));
 }
 
 void Box::render(lz::shader *shader)

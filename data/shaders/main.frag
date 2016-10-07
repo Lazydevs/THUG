@@ -20,7 +20,7 @@ void main()
 	lights[0].pos = vec3(5, 1.5, 5);
 	lights[0].color = vec3(1, 0.6, 0.3);
 
-	lights[1].pos = vec3(25, 1.5, 5);
+	lights[1].pos = vec3(-5, 1.5, -5);
 	lights[1].color = vec3(1, 1, 1);
 
 	vec3 light = vec3(0, 0, 0);

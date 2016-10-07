@@ -11,28 +11,14 @@ FILES	=	main.cpp															\
 			engine/graphics/camera.cpp											\
 			engine/inputs/input.cpp												\
 			engine/utils/timer.cpp												\
+			engine/physics/physics_world.cpp									\
 			game/box.cpp														\
 			game/game.cpp
 
 NAME = THUG
 CXX = g++
-LDFLAGS = 	--static															\
-			-lglfw3 															\
-			-lglew32 															\
-			-lopengl32 															\
-			-lgdi32																\
-			-lLowLevel															\
-			-lLowLevelCloth														\
-			-lPhysX3Extensions													\
-			-lPhysX3Vehicle														\
-			-lPhysXProfileSDK													\
-			-lPhysXVisualDebuggerSDK											\
-			-lPvdRuntime														\
-			-lPxTask															\
-			-lSceneQuery														\
-			-lSimulationController
-
-CXXFLAGS = -I includes/ -std=c++11 -L libs/ $(LDFLAGS)
+LDFLAGS = --static -lglfw3 -lglew32 -lopengl32 -lgdi32 -lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath 
+CXXFLAGS = -I ./includes/ -I ./includes/Bullet/ -std=c++11 -L ./libs/ $(LDFLAGS)
 BIN = bin/
 SRC = $(addprefix src/,$(FILES))
 OBJ = $(SRC:.cpp=.o)
