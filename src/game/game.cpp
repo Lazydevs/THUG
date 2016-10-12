@@ -19,7 +19,7 @@ Game::~Game()
 	m_boxes.clear();
 }
 
-void Game::update(input *input, camera *camera)
+void Game::update(Input *input, Camera *camera)
 {
 	m_groundBox->update();
 		for (Box *box : m_boxes)
@@ -40,7 +40,7 @@ void Game::update(input *input, camera *camera)
 	m_physicsWorld->update(1.0 / 60.0);
 }
 
-void Game::render(shader *shader)
+void Game::render(Shader *shader)
 {
 	m_groundBox->render(shader);
 	for (Box *box : m_boxes)

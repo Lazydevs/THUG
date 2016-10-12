@@ -7,7 +7,7 @@
 
 namespace lz
 {
-	class display
+	class Display
 	{
 	private:
 	    GLFWwindow *m_window;
@@ -26,8 +26,8 @@ namespace lz
 	    void create(const char *title, int width, int height);
 
 	public:
-	    display(const char *title, int width, int height);
-	    ~display();
+	    Display(const char *title, int width, int height);
+	    ~Display();
 
 	    void update();
 

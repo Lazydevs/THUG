@@ -6,7 +6,7 @@
 
 namespace lz
 {
-	class input
+	class Input
 	{
 	private:
 		double m_x;
@@ -17,11 +17,11 @@ namespace lz
 		GLFWwindow *m_window;
 
 	public:
-		input(GLFWwindow *window);
-		~input();
+		Input(GLFWwindow *window);
+		~Input();
 
-		void update(display *display);
-		void updateMouseMovement(display *display);
+		void update(Display *display);
+		void updateMouseMovement(Display *display);
 
 		bool getKey(int key);
 		bool getButton(int button);

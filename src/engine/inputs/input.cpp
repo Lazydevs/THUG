@@ -2,7 +2,7 @@
 
 using namespace lz;
 
-input::input(GLFWwindow *window)
+Input::Input(GLFWwindow *window)
 {
 	m_window = window;
 	m_x = 0;
@@ -12,16 +12,16 @@ input::input(GLFWwindow *window)
 	m_focused = false;
 }
 
-input::~input()
+Input::~Input()
 {
 }
 
-void input::update(display *display)
+void Input::update(Display *display)
 {
 
 }
 
-void input::updateMouseMovement(display *display)
+void Input::updateMouseMovement(Display *display)
 {
 	if (glfwGetMouseButton(m_window, 0) && !m_focused)
 	{
@@ -44,12 +44,12 @@ void input::updateMouseMovement(display *display)
 	}
 }
 
-bool input::getKey(int key)
+bool Input::getKey(int key)
 {
 	return (glfwGetKey(m_window, key));
 }
 
-bool input::getButton(int button)
+bool Input::getButton(int button)
 {
 	return (glfwGetMouseButton(m_window, button));
 }

@@ -8,7 +8,7 @@ namespace lz
 {
 	using namespace maths;
 
-	class shader
+	class Shader
 	{
 	private:
 		GLuint	m_program;
@@ -19,8 +19,8 @@ namespace lz
 		GLuint 	getUniformLocation(char *name);
 
 	public:
-		shader(const char *vertex_path, const char *fragment_path);
-		~shader();
+		Shader(const char *vertex_path, const char *fragment_path);
+		~Shader();
 
 		void 	setUniform(char *name, GLint v);
 		void 	setUniform(char *name, GLfloat v);

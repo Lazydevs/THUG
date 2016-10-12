@@ -61,7 +61,7 @@ void Box::update()
 	m_transform.setRotation(quat(t.getRotation().getX(), t.getRotation().getY(), t.getRotation().getZ(), t.getRotation().getW()));
 }
 
-void Box::render(lz::shader *shader)
+void Box::render(lz::Shader *shader)
 {
 	shader->setUniform((char *)"modelMatrix", m_transform.toMatrix());
 	glBindVertexArray(m_vao);

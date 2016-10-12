@@ -23,8 +23,8 @@ public:
 	Game();
 	~Game();
 
-	void update(lz::input *input, lz::camera *camera);
-	void render(lz::shader *shader);
+	void update(lz::Input *input, lz::Camera *camera);
+	void render(lz::Shader *shader);
 };
 
 #endif

@@ -5,7 +5,7 @@
 
 namespace lz
 {
-	class timer
+	class Timer
 	{
 	private:
 		typedef std::chrono::high_resolution_clock t_high_res_clock;
@@ -13,8 +13,8 @@ namespace lz
 		std::chrono::time_point<t_high_res_clock> m_start;
 
 	public:
-		timer();
-		~timer();
+		Timer();
+		~Timer();
 
 		void reset();
 

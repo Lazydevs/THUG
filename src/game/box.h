@@ -91,7 +91,7 @@ public:
 	~Box();
 
 	void update();
-	void render(lz::shader *shader);
+	void render(lz::Shader *shader);
 
 	inline btRigidBody *getBody() { return (m_rigidBody); }
 };

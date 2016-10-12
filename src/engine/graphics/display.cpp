@@ -2,18 +2,18 @@
 
 using namespace lz;
 
-display::display(const char *title, int width, int height)
+Display::Display(const char *title, int width, int height)
 {
     m_width = width;
     m_height = height;
 
-    display::create(title, width, height);
+    Display::create(title, width, height);
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 }
 
-void display::create(const char *title, int width, int height)
+void Display::create(const char *title, int width, int height)
 {
     m_title = title;
     if (!glfwInit())
@@ -46,12 +46,12 @@ void display::create(const char *title, int width, int height)
 	}
 }
 
-display::~display()
+Display::~Display()
 {
     glfwTerminate();
 }
 
-void display::update()
+void Display::update()
 {
     glfwPollEvents();
 	glfwSwapBuffers(m_window);
@@ -70,13 +70,13 @@ void display::update()
     m_closed = glfwWindowShouldClose(m_window) == 1;
 }
 
-void display::setTitle(const char* title)
+void Display::setTitle(const char* title)
 {
     m_title = title;
     glfwSetWindowTitle(m_window, title);
 }
 
-const char *display::getTitle()
+const char *Display::getTitle()
 {
     return (m_title.c_str());
 }

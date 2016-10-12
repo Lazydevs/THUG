@@ -2,16 +2,16 @@
 
 using namespace lz;
 
-timer::timer()
+Timer::Timer()
 {
 	reset();
 }
 
-timer::~timer()
+Timer::~Timer()
 {
 }
 
-void timer::reset()
+void Timer::reset()
 {
 	m_start = t_high_res_clock::now();
 }
