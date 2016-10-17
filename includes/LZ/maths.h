@@ -3,7 +3,7 @@
 
 # include <math.h>
 
-# define PI 3.14159265358979323846264338327950288419716939937510582f
+# define PI 3.14159265358979323846264338327950288419716939937510582
 
 # define TO_RADIANS(x) (float) (x * PI / 180.0f)
 # define TO_DEGREES(x) (float) (x * 180.0f / PI)
@@ -29,16 +29,79 @@ namespace lz
 {
 	namespace maths
 	{
+		class vec2;
 		class vec3;
 		class mat4;
 		class quat;
 
-	    class vec3
-	    {
-	    public:
-	        float x;
-	        float y;
-	        float z;
+		class vec2
+		{
+		public:
+			float x;
+			float y;
+
+			vec2();
+			vec2(float x, float y);
+			vec2(vec2 *v);
+			void set(float x, float y);
+
+			float magnitude();
+			vec3 normalize();
+
+			//ADD
+			inline vec2 add(float x, float y)
+			{
+				this->x += x;
+				this->y += y;
+
+				return (this);
+			}
+			inline vec2 add(float v) { return add(v, v); };
+			inline vec2 add(vec2 v) { return add(v.x, v.y); };
+
+			//SUB
+			inline vec2 sub(float x, float y)
+			{
+				this->x -= x;
+				this->y -= y;
+
+				return (this);
+			}
+			inline vec2 sub(float v) { return sub(v, v); };
+			inline vec2 sub(vec2 v) { return sub(v.x, v.y); };
+
+			//MUL
+			inline vec2 mul(float x, float y)
+			{
+				this->x *= x;
+				this->y *= y;
+
+				return (this);
+			}
+			inline vec2 mul(float v) { return mul(v, v); };
+			inline vec2 mul(vec2 v) { return mul(v.x, v.y); };
+
+			//DIV
+			inline vec2 div(float x, float y)
+			{
+				this->x /= x;
+				this->y /= y;
+
+				return (this);
+			}
+			inline vec2 div(float v) { return div(v, v); };
+			inline vec2 div(vec2 v) { return div(v.x, v.y); };
+
+			inline vec2 copy() { return vec2(this->x, this->y); };
+		};
+
+
+		class vec3
+		{
+		public:
+			float x;
+			float y;
+			float z;
 
 			vec3();
 			vec3(float x, float y, float z);
@@ -104,12 +167,12 @@ namespace lz
 			inline vec3 div(vec3 v) { return div(v.x, v.y, v.z); };
 
 			inline vec3 copy() { return vec3(this->x, this->y, this->z); };
-	    };
+		};
 
-	    class mat4
-	    {
-	    public:
-	        float m_matrix[4 * 4];
+		class mat4
+		{
+		public:
+			float m_matrix[4 * 4];
 
 			mat4 mul(mat4 m);
 
@@ -126,15 +189,15 @@ namespace lz
 			static mat4 orthographic(float right, float left, float top, float bottom, float near, float far);
 
 			static vec3 transform(mat4 m, vec3 v);
-	    };
+		};
 
-	    class quat
-	    {
-	    public:
-	        float x;
-	        float y;
-	        float z;
-	        float w;
+		class quat
+		{
+		public:
+			float x;
+			float y;
+			float z;
+			float w;
 
 			quat();
 			quat(quat* q);
@@ -157,7 +220,7 @@ namespace lz
 			vec3 getLeft();
 			vec3 getUp();
 			vec3 getDown();
-	    };
+		};
 	}
 }
 

@@ -66,3 +66,83 @@ char		*str_concat(char *str1, char *str2)
 		result[i + j] = str2[j++];
 	return (result);
 }
+
+int str_count_char(char *str, char split)
+{
+	int i;
+	int n;
+
+	i = 0;
+	n = 0;
+	while(str[i])
+	{
+		if(str[++i] == split)
+			continue;
+		while(str[i] != split && str[i])
+			i++;
+		n++;
+	}
+	return (n);
+}
+
+char **str_split(char *str, char split)
+{
+	int i;
+	int j;
+	int char_count;
+	int n;
+	int split_count;
+	char **result;
+
+	i = 0;
+	n = 0;
+	split_count = str_count_char(str, split);
+	if (!(result = (char **)malloc((split_count + 1) * sizeof(char *))))
+		return (NULL);
+	while (str[i])
+	{
+		while (str[i] == split)
+			i++;
+		char_count = 0;
+		while(str[char_count + i] != split && str[char_count + i])
+			char_count++;
+		if (!(result[n] = (char *)malloc((char_count + 1) * sizeof(char))))
+			return (NULL);
+		for (j = 0; j < char_count; j++)
+			result[n][j] = str[i++];
+		result[n][j] = '\0';
+		n++;
+	}
+	result[n] = NULL;
+	return (result);
+}
+
+void		str_print_tab(char **tab)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (tab[i])
+	{
+		while (tab[i][j])
+		{
+			put_char(tab[i][j]);
+			j++;
+		}
+		put_char('\n');
+		j = 0;
+		i++;
+	}
+}
+
+void 		str_clean_tab(char **tab)
+{
+	int i;
+
+	i = 0;
+	while(tab[i++])
+		free(tab[i - 1]);
+	free(tab);
+}

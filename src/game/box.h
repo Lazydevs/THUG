@@ -5,6 +5,7 @@
 # include <LZ/transform.h>
 # include <LZ/shader.h>
 # include <LZ/physics.h>
+# include <LZ/mesh.h>
 # include <GL/glew.h>
 
 class Box
@@ -83,6 +84,8 @@ private:
 		16, 17, 18, 16, 18, 19,
 		20, 22, 21, 20, 23, 22
 	};
+
+	lz::Mesh *m_mesh;
 
 	btRigidBody *m_rigidBody;
 

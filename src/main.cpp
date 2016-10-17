@@ -10,15 +10,15 @@ using namespace lz::maths;
 
 int main(int argc, char **argv)
 {
-	lz::Display display = lz::Display("THUG !", 1280, 720);
-	lz::Shader 	shader  = lz::Shader("data/shaders/main.vert", "data/shaders/main.frag");
-	lz::Camera	camera  = lz::Camera(vec3(0, 0, 0));
-	lz::Input	input   = lz::Input(display.getWindow());
+	lz::Display display	= lz::Display("THUG !", 1280, 720);
+	lz::Shader 	shader	= lz::Shader("data/shaders/main.vert", "data/shaders/main.frag");
+	lz::Camera	camera	= lz::Camera(vec3(0, 0, 0));
+	lz::Input	input	= lz::Input(display.getWindow());
 
 	Game 		*game = new Game();
 
-	double updatedTime = 0;
-	lz::Timer	timer = lz::Timer();
+	double updatedTime	= 0;
+	lz::Timer timer		= lz::Timer();
 	int frames;
 	int ticks;
 

@@ -17,6 +17,8 @@ FILES	=	main.cpp															\
 			engine/inputs/input.cpp												\
 			engine/utils/timer.cpp												\
 			engine/physics/physics_world.cpp									\
+			engine/graphics/mesh.cpp											\
+			engine/graphics/obj_loader.cpp										\
 			game/box.cpp														\
 			game/game.cpp
 
@@ -29,11 +31,12 @@ DIRS	=	bin\engine\maths													\
 			bin\game
 
 LDFLAGS = 	--static -lglfw3 -lglew32 -lopengl32 -lgdi32 						\
-			-lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath 
+			-lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath	\
+			-lfreetype
 
 NAME = THUG
 CXX = g++
-CXXFLAGS = -I ./includes/ -I ./includes/Bullet/ -std=c++11 -L ./libs/ $(LDFLAGS)
+CXXFLAGS = -I ./includes/ -I ./includes/Bullet/ -I ./includes/FreeType/ -std=c++11 -L ./libs/ $(LDFLAGS)
 BIN = bin
 SRC = $(addprefix src/,$(FILES))
 OBJ = $(addprefix $(BIN)/,$(FILES:.cpp=.o))
