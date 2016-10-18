@@ -2,7 +2,7 @@
 
 using namespace lz;
 
-maths::mat4 transform::toMatrix()
+maths::mat4 Transform::toMatrix()
 {
 	maths::mat4 translationMatrix = maths::mat4::translate(m_pos.x, m_pos.y, m_pos.z);
 	maths::mat4 rotationMatrix = m_rot.to_matrix();
@@ -14,12 +14,12 @@ maths::mat4 transform::toMatrix()
 	return (transformationMatrix);
 };
 
-void transform::rotate(maths::vec3 axis, float angle)
+void Transform::rotate(maths::vec3 axis, float angle)
 {
 	m_rot = maths::quat(axis, TO_RADIANS(angle)).mul(m_rot).normalize();
 };
 
-void transform::translate(maths::vec3 axis, float speed)
+void Transform::translate(maths::vec3 axis, float speed)
 {
 	m_pos.add(axis.mul(speed));
 };

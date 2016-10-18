@@ -1,11 +1,11 @@
 #ifndef TRANSFORM_H
 # define TRANSFORM_H
 
-# include "maths.h"
+# include <LZ/maths.h>
 
 namespace lz
 {
-	class transform
+	class Transform
 	{
 	private:
 		maths::vec3 m_pos;
@@ -13,35 +13,35 @@ namespace lz
 		maths::vec3 m_scale;
 
 	public:
-		transform()
+		Transform()
 		{
 			m_pos = maths::vec3();
 			m_rot = maths::quat();
 			m_scale = maths::vec3();
 		}
 
-		transform(maths::vec3 pos, maths::quat rot, maths::vec3 scale)
+		Transform(maths::vec3 pos, maths::quat rot, maths::vec3 scale)
 		{
 			m_pos = pos;
 			m_rot = rot;
 			m_scale = scale;
 		}
 
-		transform(maths::vec3 pos, maths::quat rot)
+		Transform(maths::vec3 pos, maths::quat rot)
 		{
 			m_pos = pos;
 			m_rot = rot;
 			m_scale = maths::vec3();
 		}
 
-		transform(maths::vec3 pos)
+		Transform(maths::vec3 pos)
 		{
 			m_pos = pos;
 			m_rot = maths::quat();
 			m_scale = maths::vec3();
 		}
 
-		transform(transform* t)
+		Transform(Transform* t)
 		{
 			m_pos = t->m_pos;
 			m_rot = t->m_rot;

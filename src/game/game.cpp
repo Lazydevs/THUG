@@ -8,7 +8,7 @@ using namespace physics;
 Game::Game()
 {
 	m_physicsWorld = new PhysicsWorld(vec3(0, -9.81, 0));
-	m_groundBox = new Box(transform(vec3(0, 0, 0), quat(0, 0, 0, 1), vec3(15, 0.5, 15)), 0.0);
+	m_groundBox = new Box(Transform(vec3(0, 0, 0), quat(0, 0, 0, 1), vec3(15, 0.5, 15)), 0.0);
 	m_physicsWorld->addBody(m_groundBox->getBody());
 	m_mousePressed = false;
 }
@@ -27,7 +27,7 @@ void Game::update(Input *input, Camera *camera)
 
 	if (input->getButton(0))
 	{
-		transform boxTransform = transform(camera->getTransform());
+		Transform boxTransform = Transform(camera->getTransform());
 		boxTransform.setScale(vec3(0.5, 0.5, 0.5));
 		Box *box = new Box(boxTransform, 1.0);
 		m_physicsWorld->addBody(box->getBody());

@@ -2,7 +2,6 @@
 #                                THUG MAKEFILE                                  #
 #-------------------------------------------------------------------------------#
 
-# We have to do this because of Winshit and because wildcards are bad
 FILES	=	main.cpp															\
 			engine/graphics/display.cpp											\
 			engine/maths/vec3.cpp												\
@@ -22,7 +21,6 @@ FILES	=	main.cpp															\
 			game/box.cpp														\
 			game/game.cpp
 
-# We also have to do this because of Winshit but predominately because of Winshit 
 DIRS	=	bin\engine\maths													\
 			bin\engine\graphics													\
 			bin\engine\inputs													\
@@ -36,7 +34,12 @@ LDFLAGS = 	--static -lglfw3 -lglew32 -lopengl32 -lgdi32 						\
 
 NAME = THUG
 CXX = g++
-CXXFLAGS = -I ./includes/ -I ./includes/Bullet/ -I ./includes/FreeType/ -std=c++11 -L ./libs/ $(LDFLAGS)
+CXXFLAGS = 	-I ./includes/														\
+			-I ./includes/Bullet/ 												\
+			-I ./includes/FreeType/ 											\
+			-std=c++11 															\
+			-L ./libs/ $(LDFLAGS)
+
 BIN = bin
 SRC = $(addprefix src/,$(FILES))
 OBJ = $(addprefix $(BIN)/,$(FILES:.cpp=.o))
@@ -59,6 +62,8 @@ clean:
 
 fclean: clean
 	del $(NAME).exe
+
+re: fclean all
 
 test : all
 	$(NAME).exe

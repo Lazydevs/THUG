@@ -4,15 +4,15 @@ using namespace lz;
 
 Camera::Camera(maths::vec3 pos)
 {
-	m_transform = transform(pos);
+	m_transform = Transform(pos);
 }
 
 Camera::Camera(maths::vec3 pos, maths::quat rot)
 {
-	m_transform = transform(pos, rot);
+	m_transform = Transform(pos, rot);
 }
 
-Camera::Camera(transform trs)
+Camera::Camera(Transform trs)
 {
 	m_transform = trs;
 }
@@ -42,12 +42,12 @@ void Camera::control(Input *input, float speed)
 
 void Camera::update()
 {
-	maths::mat4 translation_matrix = maths::mat4::translate(m_transform.getPosition().mul(-1));
-	maths::mat4 rotation_matrix = maths::mat4::cameraView(m_transform.getForward(), m_transform.getUp());
-	m_view_matrix = rotation_matrix.mul(translation_matrix);
+	maths::mat4 translationMatrix = maths::mat4::translate(m_transform.getPosition().mul(-1));
+	maths::mat4 rotationMatrix = maths::mat4::cameraView(m_transform.getForward(), m_transform.getUp());
+	m_viewMatrix = rotationMatrix.mul(translationMatrix);
 }
 
 void Camera::perspective(float fov, float w, float h, float near, float far)
 {
-	m_projection_matrix = maths::mat4::perspective(fov, w / h, near, far);
+	m_projectionMatrix = maths::mat4::perspective(fov, w / h, near, far);
 }

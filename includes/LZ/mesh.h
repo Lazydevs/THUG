@@ -6,6 +6,7 @@
 # include <iostream>
 # include <vector>
 # include <LZ/maths.h>
+# include <LZ/buffers.h>
 
 using namespace lz::maths;
 
@@ -16,32 +17,32 @@ namespace lz
 	private:
 		GLuint  m_vao, m_vbo, m_cbo, m_nbo, m_tbo, m_ibo;
 
-		GLfloat 	*m_positions;
-		GLfloat 	*m_texCoords;
-		GLfloat 	*m_normals;
-		GLfloat 	*m_tangents;
-		GLuint	 	*m_indices;
+		GLfloatBuffer 	m_positions;
+		GLfloatBuffer 	m_texCoords;
+		GLfloatBuffer 	m_normals;
+		GLfloatBuffer 	m_tangents;
+		GLuintBuffer 	m_indices;
 
-		int 		m_size;
+		int 			m_size;
 
 	public:
-		Mesh(GLfloat *positions, GLfloat *normals, GLuint *indices, int size);
+		Mesh(GLfloatBuffer positions, GLfloatBuffer normals, GLuintBuffer indices, int size);
 		~Mesh();
 		
 		void create();
 		void draw();
 
-		inline void setPositions(GLfloat *positions) { m_positions = positions; }
-		inline void setTexCoords(GLfloat *texCoords) { m_texCoords = texCoords; }
-		inline void setNormals(GLfloat *normals) { m_normals = normals; }
-		inline void setTangents(GLfloat *tangents) { m_tangents = tangents; }
-		inline void setIndices(GLuint *indices) { m_indices = indices; }
+		inline void setPositions(GLfloatBuffer positions) { m_positions = positions; }
+		inline void setTexCoords(GLfloatBuffer texCoords) { m_texCoords = texCoords; }
+		inline void setNormals(GLfloatBuffer normals) { m_normals = normals; }
+		inline void setTangents(GLfloatBuffer tangents) { m_tangents = tangents; }
+		inline void setIndices(GLuintBuffer indices) { m_indices = indices; }
 
-		inline GLfloat *getPositions() { return (m_positions); }
-		inline GLfloat *getTexCoords() { return (m_texCoords); }
-		inline GLfloat *getNormals() { return (m_normals); }
-		inline GLfloat *getTangents() { return (m_tangents); }
-		inline GLuint  *getIndices() { return (m_indices); }
+		inline GLfloatBuffer getPositions() { return (m_positions); }
+		inline GLfloatBuffer getTexCoords() { return (m_texCoords); }
+		inline GLfloatBuffer getNormals() { return (m_normals); }
+		inline GLfloatBuffer getTangents() { return (m_tangents); }
+		inline GLuintBuffer  getIndices() { return (m_indices); }
 	};
 }
 

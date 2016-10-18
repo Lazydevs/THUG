@@ -7,11 +7,12 @@
 # include <LZ/physics.h>
 # include <LZ/mesh.h>
 # include <GL/glew.h>
+# include <LZ/buffers.h>
 
 class Box
 {
 private:
-	lz::transform m_transform;
+	lz::Transform m_transform;
 	lz::maths::vec3 m_force;
 	GLuint m_vao, m_vbo, m_nbo, m_ibo;
 	GLfloat m_vertices[6 * 4 * 3] = {
@@ -85,12 +86,11 @@ private:
 		20, 22, 21, 20, 23, 22
 	};
 
-	lz::Mesh *m_mesh;
-
+	lz::Mesh 	*m_mesh;
 	btRigidBody *m_rigidBody;
 
 public:
-	Box(lz::transform transform, float mass);
+	Box(lz::Transform transform, float mass);
 	~Box();
 
 	void update();

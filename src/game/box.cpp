@@ -1,11 +1,17 @@
 #include "box.h"
 #include <iostream>
 
-Box::Box(lz::transform transform, float mass)
+using namespace lz;
+
+Box::Box(Transform transform, float mass)
 {
 	m_transform = transform;
+
+	GLfloatBuffer vertices = {sizeof(m_vertices), m_vertices};
+	GLfloatBuffer normals = {sizeof(m_normals), m_normals};
+	GLuintBuffer indices = {sizeof(m_indices), m_indices};
 	
-	m_mesh = new lz::Mesh(m_vertices, m_normals, m_indices, 6*6);
+	m_mesh = new Mesh(vertices, normals, indices, 6*6);
 	m_mesh->create();
 	
 	btTransform t;
@@ -42,12 +48,8 @@ void Box::update()
 	m_transform.setRotation(quat(t.getRotation().getX(), t.getRotation().getY(), t.getRotation().getZ(), t.getRotation().getW()));
 }
 
-void Box::render(lz::Shader *shader)
+void Box::render(Shader *shader)
 {
 	shader->setUniform((char *)"modelMatrix", m_transform.toMatrix());
-	// glBindVertexArray(m_vao);
-	// glDrawElements(GL_TRIANGLES, 6 * 6, GL_UNSIGNED_INT, 0);
-	// glBindVertexArray(0);
-
 	m_mesh->draw();
 }

@@ -1,7 +1,7 @@
 #ifndef INPUT_H
 # define INPUT_H
 
-# include "LZ/display.h"
+# include <LZ/display.h>
 # include <GLFW/glfw3.h>
 
 namespace lz

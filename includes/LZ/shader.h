@@ -1,8 +1,8 @@
 #ifndef SHADER_H
 # define SHADER_H
 
-# include "gl_utils.h"
-# include "maths.h"
+# include <LZ/gl_utils.h>
+# include <LZ/maths.h>
 
 namespace lz
 {
