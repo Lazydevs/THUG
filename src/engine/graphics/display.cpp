@@ -44,10 +44,15 @@ void Display::create(const char *title, int width, int height)
 		std::cerr << "GLEW initialisation failed" << std::endl;
 		return;
 	}
+
+	// m_nkCtx = nk_glfw3_init(m_window, NK_GLFW3_INSTALL_CALLBACKS);
+	// nk_glfw3_font_stash_begin(&m_nkAtlas);
+    // nk_glfw3_font_stash_end();
 }
 
 Display::~Display()
 {
+	// nk_glfw3_shutdown();
     glfwTerminate();
 }
 

@@ -30,13 +30,15 @@ DIRS	=	bin\engine\maths													\
 
 LDFLAGS = 	--static -lglfw3 -lglew32 -lopengl32 -lgdi32 						\
 			-lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath	\
-			-lfreetype
+			-lfreetype															\
+			-lfreeimage
 
 NAME = THUG
 CXX = g++
 CXXFLAGS = 	-I ./includes/														\
 			-I ./includes/Bullet/ 												\
 			-I ./includes/FreeType/ 											\
+			-I ./includes/FreeImage/ 											\
 			-std=c++11 															\
 			-L ./libs/ $(LDFLAGS)
 
@@ -55,7 +57,7 @@ $(NAME): $(OBJ)
 $(BIN)/%.o: src/%.cpp
 	$(CXX) -o $@ -c $< $(CXXFLAGS)
 
-.PHONY: clean fclean
+.PHONY: clean fclean re test
 
 clean:
 	rmdir /s /q $(BIN)

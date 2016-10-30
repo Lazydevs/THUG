@@ -17,7 +17,7 @@ namespace lz
 		{
 			m_pos = maths::vec3();
 			m_rot = maths::quat();
-			m_scale = maths::vec3();
+			m_scale = maths::vec3(1, 1, 1);
 		}
 
 		Transform(maths::vec3 pos, maths::quat rot, maths::vec3 scale)
@@ -31,14 +31,14 @@ namespace lz
 		{
 			m_pos = pos;
 			m_rot = rot;
-			m_scale = maths::vec3();
+			m_scale = maths::vec3(1, 1, 1);
 		}
 
 		Transform(maths::vec3 pos)
 		{
 			m_pos = pos;
 			m_rot = maths::quat();
-			m_scale = maths::vec3();
+			m_scale = maths::vec3(1, 1, 1);
 		}
 
 		Transform(Transform* t)

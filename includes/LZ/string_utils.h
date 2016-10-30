@@ -9,5 +9,9 @@ void		put_str(const char *str);
 void		put_nbr(int nb);
 int			str_len(const char *str);
 char		*str_concat(char *str1, char *str2);
+int 		str_count_char(char *str, char split);
+char 		**str_split(char *str, char split);
+void		str_print_tab(char **tab);
+void 		str_clean_tab(char **tab);
 
 #endif

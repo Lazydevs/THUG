@@ -21,7 +21,6 @@ char		*lz::load_file(const char *name)
 	result = NULL;
 	while ((read_size = read(fd, read_buff, 1024)) != 0)
 	{
-		//put_str(read_buff);
 		tmp = result;
 		read_buff[read_size] = '\0';
 		result = str_concat(result, read_buff);

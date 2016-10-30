@@ -5,6 +5,7 @@
 # include <LZ/camera.h>
 # include <LZ/transform.h>
 # include <LZ/physics.h>
+# include <LZ/mesh.h>
 # include <GL/glew.h>
 # include <iostream>
 # include <vector>

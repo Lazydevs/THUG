@@ -1,5 +1,6 @@
 #include "game.h"
 #include <LZ/physics.h>
+#include <LZ/obj_loader.h>
 
 using namespace lz;
 using namespace maths;
@@ -22,10 +23,10 @@ Game::~Game()
 void Game::update(Input *input, Camera *camera)
 {
 	m_groundBox->update();
-		for (Box *box : m_boxes)
+	for (Box *box : m_boxes)
 		box->update();
 
-	if (input->getButton(0))
+	if (input->getButton(0) && !m_mousePressed)
 	{
 		Transform boxTransform = Transform(camera->getTransform());
 		boxTransform.setScale(vec3(0.5, 0.5, 0.5));
