@@ -5,6 +5,9 @@
 # include <vector>
 # include <LZ/mesh.h>
 # include <LZ/buffers.h>
+# include <LZ/maths.h>
+
+using namespace maths;
 
 namespace lz
 {
@@ -18,9 +21,9 @@ namespace lz
 	class ObjLoader
 	{
 	private:
-		std::vector<GLfloat> 		m_loadedPositions;
-		std::vector<GLfloat> 		m_loadedTexCoords;
-		std::vector<GLfloat> 		m_loadedNormals;
+		std::vector<vec3> 			m_loadedPositions;
+		std::vector<vec2> 			m_loadedTexCoords;
+		std::vector<vec3> 			m_loadedNormals;
 		std::vector<VertexIndex> 	m_loadedIndices;
 		
 		int m_positionsSize; 
