@@ -83,18 +83,18 @@ ObjLoader::ObjLoader(char *path)
 		sever("OBJ INDICES MALLOC PROBLEM !");
 
 	int i = 0;
+	
 	for (VertexIndex index : m_loadedIndices)
 	{
-		m_positions.buffer[i * 3 + 0] = m_loadedPositions[index.position * 3 + 0];
-		m_normals.buffer[i * 3 + 0] = m_loadedNormals[index.normal * 3 + 0];
+		m_positions.buffer[index.position * 3 + 0] = m_loadedPositions[index.position * 3 + 0];
+		m_positions.buffer[index.position * 3 + 1] = m_loadedPositions[index.position * 3 + 1];
+		m_positions.buffer[index.position * 3 + 2] = m_loadedPositions[index.position * 3 + 2];
 		
-		m_positions.buffer[i * 3 + 1] = m_loadedPositions[index.position * 3 + 1];
-		m_normals.buffer[i * 3 + 1] = m_loadedNormals[index.normal * 3 + 1];
+		m_normals.buffer[index.position * 3 + 0] = m_loadedNormals[index.normal * 3 + 0];
+		m_normals.buffer[index.position * 3 + 1] = m_loadedNormals[index.normal * 3 + 1];		
+		m_normals.buffer[index.position * 3 + 2] = m_loadedNormals[index.normal * 3 + 2];
 
-		m_positions.buffer[i * 3 + 2] = m_loadedPositions[index.position * 3 + 2];
-		m_normals.buffer[i * 3 + 2] = m_loadedNormals[index.normal * 3 + 2];
-
-		m_indices.buffer[i] = i;
+		m_indices.buffer[i] = index.position;
 		i++;
 	}
 	m_mesh = new Mesh(m_positions, m_normals, m_indices, m_indicesSize);

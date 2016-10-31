@@ -19,6 +19,7 @@ FILES	=	main.cpp															\
 			engine/graphics/mesh.cpp											\
 			engine/graphics/obj_loader.cpp										\
 			game/box.cpp														\
+			game/sphere.cpp														\
 			game/game.cpp
 
 DIRS	=	bin\engine\maths													\

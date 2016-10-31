@@ -10,7 +10,7 @@ Display::Display(const char *title, int width, int height)
     Display::create(title, width, height);
 
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	//glEnable(GL_CULL_FACE);
 }
 
 void Display::create(const char *title, int width, int height)
