@@ -18,6 +18,7 @@ FILES	=	main.cpp															\
 			engine/physics/physics_world.cpp									\
 			engine/graphics/mesh.cpp											\
 			engine/graphics/obj_loader.cpp										\
+			engine/utils/resources.cpp										\
 			game/box.cpp														\
 			game/sphere.cpp														\
 			game/game.cpp
