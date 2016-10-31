@@ -11,13 +11,14 @@
 # include <vector>
 
 # include "box.h"
+# include "sphere.h"
 
 class Game
 {
 private:
 	lz::physics::PhysicsWorld *m_physicsWorld;
 	Box *m_groundBox;
-	std::vector<Box*> m_boxes;
+	std::vector<Sphere*> m_boxes;
 	bool m_mousePressed;
 
 public:

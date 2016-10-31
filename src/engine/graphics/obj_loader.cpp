@@ -24,18 +24,16 @@ ObjLoader::ObjLoader(char *path)
 		char **tokens = str_split(line, ' ');
 		if (strcmp(tokens[0], "v") == 0)
 		{
-			float x = atof(tokens[1]);
-			float y = atof(tokens[2]);
-			float z = atof(tokens[3]);
-			m_loadedPositions.push_back(vec3(x, y, z));
+			m_loadedPositions.push_back(atof(tokens[1]));
+			m_loadedPositions.push_back(atof(tokens[2]));
+			m_loadedPositions.push_back(atof(tokens[3]));
 			m_positionsSize++;
 		}
 		else if (strcmp(tokens[0], "vn") == 0)
 		{
-			float x = atof(tokens[1]);
-			float y = atof(tokens[2]);
-			float z = atof(tokens[3]);
-			m_loadedNormals.push_back(vec3(x, y, z));
+			m_loadedNormals.push_back(atof(tokens[1]));
+			m_loadedNormals.push_back(atof(tokens[2]));
+			m_loadedNormals.push_back(atof(tokens[3]));
 			m_normalsSize++;
 		}
 		else if (strcmp(tokens[0], "f") == 0)
@@ -64,34 +62,36 @@ ObjLoader::ObjLoader(char *path)
 			m_loadedIndices.push_back(b);
 			m_loadedIndices.push_back(c);
 
-			m_indicesSize++;
+			m_indicesSize += 3;
 		}
 	}
-	
-	m_positions.size = sizeof(GLfloat) * m_positionsSize * 3;
+	fclose(fp);
+	m_positions.size = sizeof(GLfloat) * m_indicesSize * 3;
 	m_positions.buffer = (GLfloat *)malloc(m_positions.size);
 	if (m_positions.buffer == NULL)
 		sever("OBJ POSITION MALLOC PROBLEM !");
-	m_normals.size = sizeof(GLfloat) * m_normalsSize * 3;
+	m_normals.size = sizeof(GLfloat) * m_indicesSize * 3;
 	m_normals.buffer = (GLfloat *)malloc(m_normals.size);
 	if (m_normals.buffer == NULL)
 		sever("OBJ NORMALS MALLOC PROBLEM !");
-	m_indices.size = sizeof(GLuint) * m_indicesSize * 3;
+	m_indices.size = sizeof(GLuint) * m_indicesSize;
 	m_indices.buffer = (GLuint *)malloc(m_indices.size);
 	if (m_indices.buffer == NULL)
 		sever("OBJ INDICES MALLOC PROBLEM !");
 	
-	for (int i = 0; i < m_indicesSize; i++)
+	int i = 0;
+	for (VertexIndex index : m_loadedIndices)
 	{
-		m_positions.buffer[index.position * 3 + 0] = m_loadedPositions[index.position].x;
-		m_positions.buffer[index.position * 3 + 1] = m_loadedPositions[index.position].y;
-		m_positions.buffer[index.position * 3 + 2] = m_loadedPositions[index.position].z;
-		
-		m_normals.buffer[index.normal * 3 + 0] = m_loadedNormals[index.normal].x;
-		m_normals.buffer[index.normal * 3 + 1] = m_loadedNormals[index.normal].y;
-		m_normals.buffer[index.normal * 3 + 2] = m_loadedNormals[index.normal].z;
+		m_positions.buffer[i * 3 + 0] = m_loadedPositions[index.position * 3 + 0];
+		m_positions.buffer[i * 3 + 1] = m_loadedPositions[index.position * 3 + 1];
+		m_positions.buffer[i * 3 + 2] = m_loadedPositions[index.position * 3 + 2];
+
+		m_normals.buffer[i * 3 + 0] = m_loadedNormals[index.normal * 3 + 0];
+		m_normals.buffer[i * 3 + 1] = m_loadedNormals[index.normal * 3 + 1];
+		m_normals.buffer[i * 3 + 2] = m_loadedNormals[index.normal * 3 + 2];
 
 		m_indices.buffer[i] = i;
+		i++;
 	}
 	m_mesh = new Mesh(m_positions, m_normals, m_indices, m_indicesSize);
 	m_mesh->create();

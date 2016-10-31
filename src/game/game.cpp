@@ -23,14 +23,18 @@ Game::~Game()
 void Game::update(Input *input, Camera *camera)
 {
 	m_groundBox->update();
-	for (Box *box : m_boxes)
-		box->update();
+	for (int i = 0; i < m_boxes.size(); i++)
+	{
+		m_boxes[i]->update();
+		if (m_boxes[i]->getTransform().getPosition().y < 0)
+			m_boxes.erase(m_boxes.begin() + i);
+	}
 
 	if (input->getButton(0) && !m_mousePressed)
 	{
 		Transform boxTransform = Transform(camera->getTransform());
 		boxTransform.setScale(vec3(0.5, 0.5, 0.5));
-		Box *box = new Box(boxTransform, 1.0);
+		Sphere *box = new Sphere(boxTransform, 1.0);
 		m_physicsWorld->addBody(box->getBody());
 		m_boxes.push_back(box);
 		m_mousePressed = true;
@@ -44,6 +48,8 @@ void Game::update(Input *input, Camera *camera)
 void Game::render(Shader *shader)
 {
 	m_groundBox->render(shader);
-	for (Box *box : m_boxes)
+	for (Sphere *box : m_boxes)
+	{
 		box->render(shader);
+	}
 }
