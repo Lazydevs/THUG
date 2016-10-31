@@ -11,7 +11,8 @@ Box::Box(Transform transform, float mass)
 	GLfloatBuffer normals = {sizeof(m_normals), m_normals};
 	GLuintBuffer indices = {sizeof(m_indices), m_indices};
 	
-	m_mesh = new Mesh(vertices, normals, indices, 6*6);
+	ObjLoader obj((char *)"data/models/ball.obj");//new Mesh(vertices, normals, indices, 6*6);
+	m_mesh = obj.getMesh();
 	m_mesh->create();
 	
 	btTransform t;

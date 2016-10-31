@@ -8,6 +8,7 @@
 # include <LZ/mesh.h>
 # include <GL/glew.h>
 # include <LZ/buffers.h>
+# include <LZ/obj_loader.h>
 
 class Box
 {

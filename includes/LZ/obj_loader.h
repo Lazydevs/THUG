@@ -8,13 +8,20 @@
 
 namespace lz
 {
+	typedef struct 	_VertexIndex
+	{
+		int position;
+		int texcoord;
+		int normal;
+	}				VertexIndex;
+
 	class ObjLoader
 	{
 	private:
-		std::vector<GLfloat> m_loadedPositions;
-		std::vector<GLfloat> m_loadedTexCoords;
-		std::vector<GLfloat> m_loadedNormals;
-		std::vector<GLuint> m_loadedIndices;
+		std::vector<GLfloat> 		m_loadedPositions;
+		std::vector<GLfloat> 		m_loadedTexCoords;
+		std::vector<GLfloat> 		m_loadedNormals;
+		std::vector<VertexIndex> 	m_loadedIndices;
 		
 		int m_positionsSize; 
 		int m_texCoordsSize; 
