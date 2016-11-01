@@ -8,8 +8,7 @@ using namespace lz;
 Sphere::Sphere(Transform transform, float mass)
 {
 	m_transform = transform;
-	//m_obj = new ObjLoader((char *)"data/models/ball_2.obj");
-	m_obj = Resources::loadObj((char *)"data/models/ball_2.obj");
+	m_obj = Resources::loadObj((char *)"data/models/ball_huge.obj");
 	m_mesh = m_obj->getMesh();
 	
 	btTransform t;

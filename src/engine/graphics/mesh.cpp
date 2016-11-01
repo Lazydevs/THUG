@@ -1,5 +1,6 @@
 #include <LZ/mesh.h>
 #include <LZ/buffers.h>
+#include <LZ/error.h>
 #include <stdio.h>
 
 using namespace lz;
@@ -22,6 +23,7 @@ Mesh::~Mesh()
 
 void Mesh::create()
 {
+	error("LOL YOLO\n");
 	glGenVertexArrays(1, &m_vao);
 	glGenBuffers(1, &m_vbo);
 	glGenBuffers(1, &m_nbo);

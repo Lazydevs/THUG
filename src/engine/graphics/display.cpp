@@ -37,7 +37,7 @@ void Display::create(const char *title, int width, int height)
 
     glfwSwapInterval(0);
     glfwMakeContextCurrent(m_window);
-
+	glViewport(0, 0, width, height);
 	glewExperimental = GL_TRUE;
 
 	if (glewInit() != GLEW_OK) {

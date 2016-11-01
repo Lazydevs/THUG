@@ -18,7 +18,7 @@ FILES	=	main.cpp															\
 			engine/physics/physics_world.cpp									\
 			engine/graphics/mesh.cpp											\
 			engine/graphics/obj_loader.cpp										\
-			engine/utils/resources.cpp										\
+			engine/utils/resources.cpp											\
 			game/box.cpp														\
 			game/sphere.cpp														\
 			game/game.cpp
@@ -30,7 +30,7 @@ DIRS	=	bin\engine\maths													\
 			bin\engine\physics													\
 			bin\game
 
-LDFLAGS = 	--static -lglfw3 -lglew32 -lopengl32 -lgdi32 						\
+LDFLAGS = 	--static -lglfw3 -lglew32 -lopengl32 -lgdi32						\
 			-lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath	\
 			-lfreetype															\
 			-lfreeimage
@@ -41,7 +41,7 @@ CXXFLAGS = 	-I ./includes/														\
 			-I ./includes/Bullet/ 												\
 			-I ./includes/FreeType/ 											\
 			-I ./includes/FreeImage/ 											\
-			-std=c++11 															\
+			-std=c++11 -g -Wall -Wextra											\
 			-L ./libs/ $(LDFLAGS)
 
 BIN = bin

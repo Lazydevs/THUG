@@ -1,5 +1,5 @@
 #version 330
-#define LIGHT_COUNT 5
+#define LIGHT_COUNT 4
 
 in vec3 v_position;
 in vec3 v_normal;
@@ -18,20 +18,25 @@ s_light lights[LIGHT_COUNT];
 void main()
 {
 	lights[0].pos = vec3(5, 1.5, 5);
-	lights[0].color = vec3(1, 0.6, 0.3);
+	lights[0].color = vec3(1, 1, 0);
 
 	lights[1].pos = vec3(-5, 1.5, -5);
-	lights[1].color = vec3(1, 1, 1);
+	lights[1].color = vec3(0.0, 1, 1);
 
-	vec3 light = vec3(0, 0, 0);
+	lights[2].pos = vec3(5, 1.5, -5);
+	lights[2].color = vec3(1, 1, 1);
 
-	for (int i = 0; i < 2; i++)
+	lights[3].pos = vec3(-5, 1.5, 5);
+	lights[3].color = vec3(1, 1, 1);
+
+	vec3 light_color = vec3(0, 0, 0);
+
+	for (int i = 0; i < LIGHT_COUNT; i++)
 	{
 		float diffuseFactor = dot(normalize(lights[i].pos - worldPosition), v_normal);
 		float lightDistance = distance(worldPosition, lights[i].pos);
 		float lightFactor = max(1.0 / lightDistance * diffuseFactor, 0);
-		light += lights[i].color * lightFactor;
+		light_color += lights[i].color * lightFactor;
 	}
-
-	out_color = vec4(light + vec3(0.5, 0.7, 1) * 0.1, 1);
+	out_color = vec4(light_color + vec3(0.5, 0.7, 1) * 0.1, 1);
 }

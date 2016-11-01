@@ -51,6 +51,8 @@ int main(int argc, char **argv)
 
 			game->render(&shader);
 
+			//nk_glfw3_render(NK_ANTI_ALIASING_ON, MAX_VERTEX_BUFFER, MAX_ELEMENT_BUFFER);
+
 			display.update();
 			if (display.wasResized())
 				glViewport(0, 0, display.getWidth(), display.getHeight());
