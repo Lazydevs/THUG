@@ -11,15 +11,15 @@ Box::Box(Transform transform, float mass)
 	GLfloatBuffer vertices = {sizeof(m_vertices), m_vertices};
 	GLfloatBuffer normals = {sizeof(m_normals), m_normals};
 	GLuintBuffer indices = {sizeof(m_indices), m_indices};
-	
+
 	m_mesh = new Mesh(vertices, normals, indices, 6*6);
 	m_mesh->create();
-	
+
 	btTransform t;
 	t.setIdentity();
 	t.setOrigin(btVector3(m_transform.getPosition().x, m_transform.getPosition().y, m_transform.getPosition().z));
 	t.setRotation(btQuaternion(m_transform.getRotation().x, m_transform.getRotation().y, m_transform.getRotation().z, m_transform.getRotation().w));
-	
+
 	btBoxShape *boxShape = new btBoxShape(btVector3(transform.getScale().x, transform.getScale().y, transform.getScale().z));
 	btVector3 inertia(0, 0, 0);
 	if (mass != 0)
@@ -43,10 +43,11 @@ Box::~Box()
 
 void Box::update()
 {
-	btTransform t;
-	m_rigidBody->getMotionState()->getWorldTransform(t);
-	m_transform.setPosition(vec3(t.getOrigin().getX(), t.getOrigin().getY(), t.getOrigin().getZ()));
-	m_transform.setRotation(quat(t.getRotation().getX(), t.getRotation().getY(), t.getRotation().getZ(), t.getRotation().getW()));
+	// btTransform t;
+	// t.setIdentity();
+	// m_rigidBody->getMotionState()->getWorldTransform(t);
+	// m_transform.setPosition(vec3(t.getOrigin().getX(), t.getOrigin().getY(), t.getOrigin().getZ()));
+	// m_transform.setRotation(quat(t.getRotation().getX(), t.getRotation().getY(), t.getRotation().getZ(), t.getRotation().getW()));
 }
 
 void Box::render(Shader *shader)

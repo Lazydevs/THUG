@@ -5,6 +5,7 @@
 #include <LZ/camera.h>
 #include <LZ/input.h>
 #include <LZ/timer.h>
+#include <LZ/string_utils.h>
 
 using namespace lz::maths;
 
@@ -56,7 +57,7 @@ int main(int argc, char **argv)
 			display.update();
 			if (display.wasResized())
 				glViewport(0, 0, display.getWidth(), display.getHeight());
-			frames++;	
+			frames++;
 		}
 	}
 

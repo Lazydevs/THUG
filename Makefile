@@ -2,6 +2,9 @@
 #                                THUG MAKEFILE                                  #
 #-------------------------------------------------------------------------------#
 
+# Debug false will build in release mode
+DEBUG	=	true
+
 FILES	=	main.cpp															\
 			engine/graphics/display.cpp											\
 			engine/maths/vec3.cpp												\
@@ -23,35 +26,64 @@ FILES	=	main.cpp															\
 			game/sphere.cpp														\
 			game/game.cpp
 
-DIRS	=	bin\engine\maths													\
-			bin\engine\graphics													\
-			bin\engine\inputs													\
-			bin\engine\utils													\
-			bin\engine\physics													\
-			bin\game
-
-LDFLAGS = 	--static -lglfw3 -lglew32 -lopengl32 -lgdi32						\
-			-lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath	\
-			-lfreetype															\
-			-lfreeimage
+DIRS	=	bin/engine/maths													\
+			bin/engine/graphics													\
+			bin/engine/inputs													\
+			bin/engine/utils													\
+			bin/engine/physics													\
+			bin/game
 
 NAME = THUG
+LDFLAGS =	-lBulletSoftBody -lBulletDynamics -lBulletCollision		 			\
+			-lLinearMath
+
+ifeq ($(OS),Windows_NT)
+	GLFLAGS = 	--static -lglfw3 -lglew32 -lopengl32 -lgdi32
+	LIB = ./libs/win/
+	NAME := $(NAME).exe
+	RMDIR = rmdir /s /q
+	RM = del
+	EXEC = $(NAME)
+	SYSTEM = Windows
+else
+	SYSTEM = $(shell uname -s)
+	ifeq (SYSTEM,Darwin)
+	else
+		GLFLAGS = 	-lglfw3 -lGL -lm -lGLU -lGLEW -lXrandr -lXi -lX11 -lXxf86vm \
+					-lpthread -ldl -lXinerama -lXcursor -lrt
+		LIB = ./libs/linux/
+		NAME := $(NAME)
+		RMDIR = rm -rf
+		RM = rm -rf
+		EXEC = ./$(NAME)
+	endif
+endif
+
 CXX = g++
-CXXFLAGS = 	-I ./includes/														\
-			-I ./includes/Bullet/ 												\
-			-I ./includes/FreeType/ 											\
-			-I ./includes/FreeImage/ 											\
-			-std=c++11 -g -Wall -Wextra											\
-			-L ./libs/ $(LDFLAGS)
+
+ifeq ($(DEBUG),true)
+	CXXFLAGS = 	-I ./includes/													\
+				-I ./includes/Bullet/ 											\
+				-std=c++11 -Wall -Wextra -g										\
+				-L $(LIB) $(GLFLAGS) $(LDFLAGS)
+else
+	CXXFLAGS = 	-I ./includes/													\
+				-I ./includes/Bullet/ 											\
+				-std=c++11 -Wall -Wextra										\
+				-L $(LIB) $(GLFLAGS) $(LDFLAGS)
+endif
 
 BIN = bin
 SRC = $(addprefix src/,$(FILES))
 OBJ = $(addprefix $(BIN)/,$(FILES:.cpp=.o))
 
 all: $(DIRS) $(NAME)
+	@echo "\n----------------- Build complete -----------------"
+	@echo "System: $(SYSTEM)"
+	@echo "Debug mode: $(DEBUG)"
 
 $(DIRS):
-	mkdir $(DIRS)
+	mkdir -p $(DIRS)
 
 $(NAME): $(OBJ)
 	$(CXX) -o $@ $^ $(CXXFLAGS)
@@ -62,12 +94,12 @@ $(BIN)/%.o: src/%.cpp
 .PHONY: clean fclean re test
 
 clean:
-	rmdir /s /q $(BIN)
+	$(RMDIR) $(BIN)
 
 fclean: clean
-	del $(NAME).exe
+	$(RM) $(NAME)
 
-re: fclean all
+re: clean all
 
 test : all
-	$(NAME).exe
+	$(EXEC)
