@@ -23,7 +23,6 @@ Mesh::~Mesh()
 
 void Mesh::create()
 {
-	error("LOL YOLO\n");
 	glGenVertexArrays(1, &m_vao);
 	glGenBuffers(1, &m_vbo);
 	glGenBuffers(1, &m_nbo);

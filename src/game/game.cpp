@@ -30,15 +30,15 @@ void Game::update(Input *input, Camera *camera)
 			m_boxes.erase(m_boxes.begin() + i);
 	}
 
-	// if (input->getButton(0) && !m_mousePressed)
-	// {
-	// 	Transform boxTransform = Transform(camera->getTransform());
-	// 	boxTransform.setScale(vec3(0.5, 0.5, 0.5));
-	// 	Sphere *box = new Sphere(boxTransform, 1.0);
-	// 	m_physicsWorld->addBody(box->getBody());
-	// 	m_boxes.push_back(box);
-	// 	m_mousePressed = true;
-	// }
+	if (input->getButton(0) && !m_mousePressed)
+	{
+	 	Transform boxTransform = Transform(camera->getTransform());
+	 	boxTransform.setScale(vec3(0.5, 0.5, 0.5));
+	 	Sphere *box = new Sphere(boxTransform, 1.0);
+	 	m_physicsWorld->addBody(box->getBody());
+	 	m_boxes.push_back(box);
+	 	m_mousePressed = true;
+	}
 	if (!input->getButton(0) && m_mousePressed)
 		m_mousePressed = false;
 

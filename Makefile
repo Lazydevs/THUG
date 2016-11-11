@@ -26,12 +26,12 @@ FILES	=	main.cpp															\
 			game/sphere.cpp														\
 			game/game.cpp
 
-DIRS	=	bin/engine/maths													\
-			bin/engine/graphics													\
-			bin/engine/inputs													\
-			bin/engine/utils													\
-			bin/engine/physics													\
-			bin/game
+DIRS	=	bin\engine\maths													\
+			bin\engine\graphics													\
+			bin\engine\inputs													\
+			bin\engine\utils													\
+			bin\engine\physics													\
+			bin\game
 
 NAME = THUG
 LDFLAGS =	-lBulletSoftBody -lBulletDynamics -lBulletCollision		 			\
@@ -41,6 +41,7 @@ ifeq ($(OS),Windows_NT)
 	GLFLAGS = 	--static -lglfw3 -lglew32 -lopengl32 -lgdi32
 	LIB = ./libs/win/
 	NAME := $(NAME).exe
+	MKDIR = mkdir
 	RMDIR = rmdir /s /q
 	RM = del
 	EXEC = $(NAME)
@@ -53,6 +54,7 @@ else
 					-lpthread -ldl -lXinerama -lXcursor -lrt
 		LIB = ./libs/linux/
 		NAME := $(NAME)
+		MKDIR = mkdir -p
 		RMDIR = rm -rf
 		RM = rm -rf
 		EXEC = ./$(NAME)
@@ -83,7 +85,7 @@ all: $(DIRS) $(NAME)
 	@echo "Debug mode: $(DEBUG)"
 
 $(DIRS):
-	mkdir -p $(DIRS)
+	$(MKDIR) $(DIRS)
 
 $(NAME): $(OBJ)
 	$(CXX) -o $@ $^ $(CXXFLAGS)

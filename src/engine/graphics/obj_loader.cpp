@@ -67,6 +67,7 @@ ObjLoader::ObjLoader(char *path)
 		}
 	}
 	fclose(fp);
+
 	m_positions.size = sizeof(GLfloat) * m_indicesSize * 3;
 	m_positions.buffer = (GLfloat *)malloc(m_positions.size);
 	if (m_positions.buffer == NULL)
