@@ -6,8 +6,13 @@ using namespace lz;
 using namespace maths;
 using namespace physics;
 
-Game::Game()
+Game::Game(Input *input, Camera *camera)
 {
+	m_input = input;
+	m_camera = camera;
+	
+	m_entityManager = new EntityManager();
+
 	m_physicsWorld = new PhysicsWorld(vec3(0, -9.81, 0));
 	m_groundBox = new Box(Transform(vec3(0, 0, 0), quat(0, 0, 0, 1), vec3(15, 0.5, 15)), 0.0);
 	m_physicsWorld->addBody(m_groundBox->getBody());
@@ -17,29 +22,21 @@ Game::Game()
 Game::~Game()
 {
 	delete m_groundBox;
-	m_boxes.clear();
+	delete m_entityManager;
 }
 
-void Game::update(Input *input, Camera *camera)
+int i = 0;
+void Game::update()
 {
-	m_groundBox->update();
-	for (int i = 0; i < m_boxes.size(); i++)
+	m_entityManager->update();
+	if (m_input->getButton(0) && !m_mousePressed)
 	{
-		m_boxes[i]->update();
-		if (m_boxes[i]->getTransform().getPosition().y < 0)
-			m_boxes.erase(m_boxes.begin() + i);
+	 	Transform trs = Transform(m_camera->getTransform());
+	 	trs.setScale(vec3(0.5, 0.5, 0.5));
+		m_entityManager->add(new Spaceship(i++, trs));
+		m_mousePressed = true;
 	}
-
-	if (input->getButton(0) && !m_mousePressed)
-	{
-	 	Transform boxTransform = Transform(camera->getTransform());
-	 	boxTransform.setScale(vec3(0.5, 0.5, 0.5));
-	 	Sphere *box = new Sphere(boxTransform, 1.0);
-	 	m_physicsWorld->addBody(box->getBody());
-	 	m_boxes.push_back(box);
-	 	m_mousePressed = true;
-	}
-	if (!input->getButton(0) && m_mousePressed)
+	if (!m_input->getButton(0) && m_mousePressed)
 		m_mousePressed = false;
 
 	m_physicsWorld->update(1.0 / 60.0);
@@ -48,8 +45,9 @@ void Game::update(Input *input, Camera *camera)
 void Game::render(Shader *shader)
 {
 	m_groundBox->render(shader);
-	for (Sphere *box : m_boxes)
+	for (std::pair<long, Entity *> data : m_entityManager->getEntities())
 	{
-		box->render(shader);
+		Entity *e = (Entity *)data.second;
+		e->render(shader);
 	}
 }

@@ -6,6 +6,7 @@ int lz::error(const char *error)
 	while (*(error++))
 		write(1, error - 1, 1);
 	write(1, "\n", 1);
+	return (0);
 }
 
 int lz::sever(const char *error)
@@ -15,4 +16,5 @@ int lz::sever(const char *error)
 		write(1, error - 1, 1);
 	write(1, "\n", 1);
 	exit(1);
+	return (1);
 }

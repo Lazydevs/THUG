@@ -6,20 +6,21 @@
 #include <LZ/input.h>
 #include <LZ/timer.h>
 #include <LZ/string_utils.h>
+#include <stdlib.h>
 
 using namespace lz::maths;
 
 int main(int argc, char **argv)
 {
-	lz::Display display	= lz::Display("THUG !", 1280, 720);
+	lz::Display display	= lz::Display("The Huge Unbelivable Galaxy or THUG !", 1280, 720);
 	lz::Shader 	shader	= lz::Shader("data/shaders/main.vert", "data/shaders/main.frag");
 	lz::Camera	camera	= lz::Camera(vec3(0, 0, 0));
 	lz::Input	input	= lz::Input(display.getWindow());
+	lz::Timer timer		= lz::Timer();
 
-	Game 		*game = new Game();
+	Game 		*game = new Game(&input, &camera);
 
 	double updatedTime	= 0;
-	lz::Timer timer		= lz::Timer();
 	int frames;
 	int ticks;
 
@@ -27,8 +28,10 @@ int main(int argc, char **argv)
 	{
 		if (timer.elapsed() - updatedTime >= 16.666666666667)
 		{
+			if (input.getKey(GLFW_KEY_ESCAPE))
+				return (0);
 			camera.control(&input, 0.1);
-			game->update(&input, &camera);
+			game->update();
 			updatedTime += 16.666666666667;
 			ticks++;
 			if (ticks % 60 == 0)

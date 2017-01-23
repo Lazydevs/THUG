@@ -12,20 +12,27 @@
 
 # include "box.h"
 # include "sphere.h"
+# include "entities/entity.h"
+# include "entities/entity_manager.h"
+# include "entities/spaceships/spaceship.h"
 
 class Game
 {
 private:
-	lz::physics::PhysicsWorld *m_physicsWorld;
-	Box *m_groundBox;
-	std::vector<Sphere*> m_boxes;
-	bool m_mousePressed;
+	EntityManager				*m_entityManager;
+
+
+	bool						m_mousePressed;
+	Box							*m_groundBox;
+	lz::physics::PhysicsWorld	*m_physicsWorld;
+	lz::Camera					*m_camera;
+	lz::Input					*m_input;
 
 public:
-	Game();
+	Game(lz::Input *input, lz::Camera *camera);
 	~Game();
 
-	void update(lz::Input *input, lz::Camera *camera);
+	void update();
 	void render(lz::Shader *shader);
 };
 

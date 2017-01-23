@@ -1,9 +1,9 @@
 #-------------------------------------------------------------------------------#
-#                                THUG MAKEFILE                                  #
+#                                  THUG MAKEFILE                                #
 #-------------------------------------------------------------------------------#
 
 # Debug false will build in release mode
-DEBUG	=	true
+DEBUG	=	false
 
 FILES	=	main.cpp															\
 			engine/graphics/display.cpp											\
@@ -22,8 +22,12 @@ FILES	=	main.cpp															\
 			engine/graphics/mesh.cpp											\
 			engine/graphics/obj_loader.cpp										\
 			engine/utils/resources.cpp											\
+			game/entities/entity.cpp											\
 			game/box.cpp														\
 			game/sphere.cpp														\
+			game/entities/entity.cpp											\
+			game/entities/entity_manager.cpp									\
+			game/entities/spaceships/spaceship.cpp								\
 			game/game.cpp
 
 DIRS	=	bin\engine\maths													\
@@ -31,7 +35,8 @@ DIRS	=	bin\engine\maths													\
 			bin\engine\inputs													\
 			bin\engine\utils													\
 			bin\engine\physics													\
-			bin\game
+			bin\game\entities													\
+			bin\game\entities\spaceships										\
 
 NAME = THUG
 LDFLAGS =	-lBulletSoftBody -lBulletDynamics -lBulletCollision		 			\
@@ -80,11 +85,16 @@ SRC = $(addprefix src/,$(FILES))
 OBJ = $(addprefix $(BIN)/,$(FILES:.cpp=.o))
 
 all: $(DIRS) $(NAME)
-	@echo "\n----------------- Build complete -----------------"
-	@echo "System: $(SYSTEM)"
-	@echo "Debug mode: $(DEBUG)"
+	@echo *------------------------------------------------*
+	@echo *                Build complete !                *
+	@echo *------------------------------------------------*
+	@echo System: $(SYSTEM)
+	@echo Debug mode: $(DEBUG)
 
 $(DIRS):
+	@echo *------------------------------------------------*
+	@echo *                 Building THUG                  *
+	@echo *------------------------------------------------*
 	$(MKDIR) $(DIRS)
 
 $(NAME): $(OBJ)

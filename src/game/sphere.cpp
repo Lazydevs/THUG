@@ -8,7 +8,7 @@ using namespace lz;
 Sphere::Sphere(Transform transform, float mass)
 {
 	m_transform = transform;
-	m_obj = Resources::loadObj((char *)"data/models/ball_huge.obj");
+	m_obj = Resources::loadObj((char *)"data/models/ico_2.obj");
 	m_mesh = m_obj->getMesh();
 	
 	btTransform t;
@@ -16,12 +16,22 @@ Sphere::Sphere(Transform transform, float mass)
 	t.setOrigin(btVector3(m_transform.getPosition().x, m_transform.getPosition().y, m_transform.getPosition().z));
 	t.setRotation(btQuaternion(m_transform.getRotation().x, m_transform.getRotation().y, m_transform.getRotation().z, m_transform.getRotation().w));
 	
-	btSphereShape *boxShape = new btSphereShape(transform.getScale().x);
+	// btSphereShape *boxShape = new btSphereShape(transform.getScale().x);
+	btConvexHullShape *boxShape = new btConvexHullShape();
+	int i = -1;
+	while (++i < (int)(m_mesh->getPositions().size / sizeof(GLuint)))
+	{
+		GLfloat *buffer = m_mesh->getPositions().buffer;
+		btVector3 v = btVector3(buffer[i * 3 + 0], buffer[i * 3 + 1], buffer[i * 3 + 2]);
+		boxShape->addPoint(v);
+	}
+
 	btVector3 inertia(0, 0, 0);
 	if (mass != 0)
 		boxShape->calculateLocalInertia(mass, inertia);
 	btDefaultMotionState *motionState = new btDefaultMotionState(t);
 	btRigidBody::btRigidBodyConstructionInfo bodyInfo(mass, motionState, boxShape, inertia);
+	
 	m_rigidBody = new btRigidBody(bodyInfo);
 
 	if (mass != 0)
