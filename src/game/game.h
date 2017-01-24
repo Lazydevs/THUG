@@ -16,24 +16,28 @@
 # include "entities/entity_manager.h"
 # include "entities/spaceships/spaceship.h"
 
+using namespace lz;
+using namespace physics;
+
 class Game
 {
 private:
 	EntityManager				*m_entityManager;
-
-
 	bool						m_mousePressed;
 	Box							*m_groundBox;
-	lz::physics::PhysicsWorld	*m_physicsWorld;
-	lz::Camera					*m_camera;
-	lz::Input					*m_input;
+	PhysicsWorld				*m_physicsWorld;
+	Camera						*m_camera;
+	Input						*m_input;
 
 public:
-	Game(lz::Input *input, lz::Camera *camera);
+	Game(Input *input, Camera *camera);
 	~Game();
 
 	void update();
-	void render(lz::Shader *shader);
+	void render(Shader *shader);
+
+	inline Camera *getCamera() { return m_camera; }
+	inline PhysicsWorld *getPhysicsWorld() { return m_physicsWorld; }
 };
 
 #endif

@@ -32,7 +32,6 @@ void Game::update()
 	if (m_input->getButton(0) && !m_mousePressed)
 	{
 	 	Transform trs = Transform(m_camera->getTransform());
-	 	trs.setScale(vec3(0.5, 0.5, 0.5));
 		m_entityManager->add(new Spaceship(i++, trs));
 		m_mousePressed = true;
 	}

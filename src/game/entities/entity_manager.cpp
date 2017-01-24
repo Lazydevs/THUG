@@ -21,10 +21,14 @@ void EntityManager::update()
 void EntityManager::add(Entity *e)
 {
 	m_entities[e->getID()] = e;
+	// if (e->getRigidBody())
+	// 	m_game->getPhysicsWorld()->addBody(e->getRigidBody());
 }
 
 void EntityManager::remove(Entity *e)
 {
+	// if (e->getRigidBody())
+	// 	m_game->getPhysicsWorld()->removeBody(e->getRigidBody());
 	m_entities.erase(e->getID());
 }
 

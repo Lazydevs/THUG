@@ -8,7 +8,8 @@
 class EntityManager
 {
 private:
-	std::map<long, Entity*>		m_entities;
+	std::map<long, Entity*>	m_entities;
+
 public:
 	EntityManager();
 	~EntityManager();

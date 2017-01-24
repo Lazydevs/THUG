@@ -24,6 +24,7 @@ namespace lz
             ~PhysicsWorld();
             
             void addBody(btRigidBody *body);
+			void removeBody(btRigidBody *body);
             void update(float step);
         };
     }

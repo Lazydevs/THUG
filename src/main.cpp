@@ -24,6 +24,8 @@ int main(int argc, char **argv)
 	int frames;
 	int ticks;
 
+	frames = 0;
+	ticks = 0;
 	while (!display.isClosed())
 	{
 		if (timer.elapsed() - updatedTime >= 16.666666666667)

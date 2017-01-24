@@ -29,6 +29,11 @@ void PhysicsWorld::addBody(btRigidBody *body)
     m_dynamicsWorld->addRigidBody(body);
 }
 
+void PhysicsWorld::removeBody(btRigidBody *body)
+{
+    m_dynamicsWorld->removeCollisionObject(body);
+}
+
 void PhysicsWorld::update(float step)
 {
     m_dynamicsWorld->stepSimulation(step);
