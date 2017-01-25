@@ -43,7 +43,7 @@ LDFLAGS =	-lBulletSoftBody -lBulletDynamics -lBulletCollision		 			\
 			-lLinearMath
 
 ifeq ($(OS),Windows_NT)
-	GLFLAGS = 	--static -lglfw3 -lglew32 -lopengl32 -lgdi32
+	GLFLAGS =  -lglfw3 -lglew32 -lopengl32 -lglu32 -lgdi32 -lm
 	LIB = ./libs/win/
 	NAME := $(NAME).exe
 	MKDIR = mkdir
